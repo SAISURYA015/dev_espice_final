@@ -1,0 +1,199 @@
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import pb from "../../_lib/pb";
+
+// const Corporate = () => {
+//   const [data, setData] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const res = await pb.collection("corporate_info").getFullList(200, {
+//           sort: "sno",
+//           requestKey: null,
+//         });
+//         setData(res);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   if (loading)
+//     return (
+//       <div className="h-full w-full flex justify-center items-center">
+//         <div className="w-20 h-20 border-4 border-gray-300 border-t-4 border-t-[#152768] rounded-full animate-spin"></div>
+//       </div>
+//     );
+
+//   return (
+//     <div>
+//       <div className="text-2xl text-[#223972] mt-3 font-semibold text-center">
+//         Corporate Information
+//       </div>
+//       <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-8">
+//         {data.length > 0 ? (
+//           data.map((item) => {
+//             return (
+//               <div
+//                 key={item.id}
+//                 className="border border-red-300 rounded-md p-4"
+//               >
+//                 <div className="font-semibold underline text-[#223972] mb-2 text-xl">
+//                   {item.title}
+//                 </div>
+//                 <p>
+//                   <strong className="text-[#152768] text-lg">
+//                     {item.subTitle}
+//                   </strong>
+//                   <br />
+//                   {item.address}
+//                   <br />
+//                   Mobile No: {item.phone}
+//                   <br />
+//                   Email:{" "}
+//                   <a href={`mailto:${item.email}`} className="text-blue-600">
+//                     {item.email}
+//                   </a>
+//                 </p>
+//               </div>
+//             );
+//           })
+//         ) : (
+//           <div>No corporate information available.</div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Corporate;
+
+"use client";
+import React, { useEffect, useState } from "react";
+import pb from "../../_lib/pb";
+
+const Corporate = () => {
+  const [data, setData] = useState({
+    address: [],
+    leaders: [],
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [addressRes, leadersRes] = await Promise.all([
+          pb
+            .collection("corporate_info")
+            .getFullList(200, { sort: "sno", requestKey: null }),
+          pb
+            .collection("leaders")
+            .getFullList(200, {
+              sort: "sno",
+              filter: 'page = "investor"',
+              requestKey: null,
+            }),
+        ]);
+
+        console.log(addressRes, leadersRes); // log response
+
+        setData({
+          address: addressRes,
+          leaders: leadersRes,
+        });
+        console.log(data); // log response
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading)
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        <div className="w-20 h-20 border-4 border-gray-300 border-t-4 border-t-[#152768] rounded-full animate-spin"></div>
+      </div>
+    );
+
+  return (
+    <div>
+      <div className="text-2xl text-[#223972] mt-3 font-semibold text-center">
+        Corporate Information
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-8">
+        {data.address.length > 0 ? (
+          data.address.map((item) => (
+            <div
+              key={item.id}
+              className="border border-gray-500 rounded-2xl p-5 shadow hover:shadow-md hover:border-red-500 transition-all bg-white"
+            >
+              <div className="font-semibold underline text-[#223972] mb-2 text-xl">
+                {item.title}
+              </div>
+              <p>
+                {item.subTitle && (
+                  <strong className="text-[#152768] text-lg">
+                    {item.subTitle}
+                  </strong>
+                )}
+                {item.subTitle &&
+                  (item.address || item.phone || item.email) && <br />}
+
+                {item.address && (
+                  <>
+                    {item.address} <br />
+                  </>
+                )}
+                {item.phone && (
+                  <>
+                    Mobile No: {item.phone} <br />
+                  </>
+                )}
+                {item.email && (
+                  <>
+                    Email:{" "}
+                    <a href={`mailto:${item.email}`} className="text-blue-600">
+                      {item.email}
+                    </a>
+                  </>
+                )}
+              </p>
+            </div>
+          ))
+        ) : (
+          <div>No corporate information available.</div>
+        )}
+      </div>
+      <div className="flex justify-center items-center">
+        <div className="border border-gray-500 rounded-2xl p-5 shadow hover:shadow-md hover:border-red-500 transition-all bg-white">
+          <h3 className="font-semibold underline text-blue-800 mb-2">
+            Key Managerial Personnel
+          </h3>
+          <ul>
+            {data.leaders.length > 0 ? (
+              data.leaders.map((leader) => (
+                <li key={leader.id}>
+                  {leader.name}- {leader.role}
+                </li>
+              ))
+            ) : (
+              <li>No leaders available.</li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Corporate;
