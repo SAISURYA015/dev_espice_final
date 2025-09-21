@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { Plus, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const GalleryVideo = () => {
   const [data, setData] = useState([]);
@@ -20,7 +21,17 @@ const GalleryVideo = () => {
   const [active, setActive] = useState(true);
   const [existingVideo, setExistingVideo] = useState("");
   const [newVideo, setNewVideo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
   // Fetch data
   const fetchData = async () => {
     const records = await pb.collection("gallery").getFullList(
@@ -123,6 +134,8 @@ const GalleryVideo = () => {
     }
   };
 
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       {/* Header */}
@@ -169,13 +182,13 @@ const GalleryVideo = () => {
                     </td>
                   </tr>
                 ) : (
-                  data.map((item,i) => (
+                  data.map((item, i) => (
                     <tr
                       key={item.id}
                       className="border-t bg-gray-50 hover:bg-gray-100 cursor-pointer"
                       onClick={() => openEdit(item)}
                     >
-                      <td className="px-3 py-2">{i+1}</td>
+                      <td className="px-3 py-2">{i + 1}</td>
                       <td className="px-3 py-2">
                         {item.video ? (
                           <video

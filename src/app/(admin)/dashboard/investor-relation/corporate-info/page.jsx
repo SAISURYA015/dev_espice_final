@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Corporate = () => {
   const [data, setData] = useState([]);
@@ -20,6 +21,18 @@ const Corporate = () => {
     phone: "",
     email: "",
   });
+
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Trigger fade when modal opens
   useEffect(() => {
@@ -110,6 +123,7 @@ const Corporate = () => {
   };
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>

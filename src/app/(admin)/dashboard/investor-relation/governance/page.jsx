@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const CorporateGovernance = () => {
   const [data, setData] = useState([]);
@@ -15,16 +16,26 @@ const CorporateGovernance = () => {
     principles: [],
     description2: "",
   });
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
   useEffect(() => {
     setFade(open);
   }, [open]);
 
   // Fetch records
   const fetchData = async () => {
-    const records = await pb.collection("corporate_governance").getFullList(
-      { requestKey: null }
-    );
+    const records = await pb
+      .collection("corporate_governance")
+      .getFullList({ requestKey: null });
     setData(records);
   };
 
@@ -61,7 +72,9 @@ const CorporateGovernance = () => {
       };
 
       if (editingRow) {
-        await pb.collection("corporate_governance").update(editingRow.id, updateData);
+        await pb
+          .collection("corporate_governance")
+          .update(editingRow.id, updateData);
       } else {
         await pb.collection("corporate_governance").create(updateData);
       }
@@ -69,7 +82,7 @@ const CorporateGovernance = () => {
       fetchData();
       setOpen(false);
       setEditingRow(null);
-      setForm({  description1: "", principles: [], description2: "" });
+      setForm({ description1: "", principles: [], description2: "" });
     } catch (err) {
       console.error(err);
       alert("Error saving: " + err.message);
@@ -110,6 +123,7 @@ const CorporateGovernance = () => {
   };
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
@@ -162,13 +176,18 @@ const CorporateGovernance = () => {
                     >
                       <td className="px-3 py-2">{item.description1}</td>
                       <td className="px-3 py-2">
-                        {Array.isArray(item.principles) && item.principles.length > 0
+                        {Array.isArray(item.principles) &&
+                        item.principles.length > 0
                           ? item.principles.join(", ")
                           : "N/A"}
                       </td>
                       <td className="px-3 py-2">{item.description2}</td>
-                      <td className="px-3 py-2 text-gray-500">{fmt(item.created)}</td>
-                      <td className="px-3 py-2 text-gray-500">{fmt(item.updated)}</td>
+                      <td className="px-3 py-2 text-gray-500">
+                        {fmt(item.created)}
+                      </td>
+                      <td className="px-3 py-2 text-gray-500">
+                        {fmt(item.updated)}
+                      </td>
                     </tr>
                   ))
                 )}
@@ -198,14 +217,20 @@ const CorporateGovernance = () => {
               </h3>
 
               {/* Form Fields */}
-              <label className="block mb-2 text-sm font-medium">Description1</label>
+              <label className="block mb-2 text-sm font-medium">
+                Description1
+              </label>
               <textarea
                 value={form.description1}
-                onChange={(e) => setForm({ ...form, description1: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, description1: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded mb-4"
               />
 
-              <label className="block mb-2 text-sm font-medium">Principles</label>
+              <label className="block mb-2 text-sm font-medium">
+                Principles
+              </label>
               <div className="space-y-2 mb-4">
                 {form.principles.map((p, i) => (
                   <div key={i} className="flex gap-2">
@@ -231,10 +256,14 @@ const CorporateGovernance = () => {
                 </button>
               </div>
 
-              <label className="block mb-2 text-sm font-medium">Description2</label>
+              <label className="block mb-2 text-sm font-medium">
+                Description2
+              </label>
               <textarea
                 value={form.description2}
-                onChange={(e) => setForm({ ...form, description2: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, description2: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded mb-4"
               />
 

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Consumer = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,17 @@ const Consumer = () => {
   const [subImg3, setSubImg3] = useState(null);
   const [subTitle3, setSubTitle3] = useState("");
   const [subDescription3, setSubDescription3] = useState("");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Trigger fade
   useEffect(() => {
@@ -90,6 +102,8 @@ const Consumer = () => {
 
   const imgUrl = (row, field) =>
     row[field] ? pb.files.getURL(row, row[field]) : null;
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Policies = () => {
   const [data, setData] = useState([]);
@@ -16,20 +17,32 @@ const Policies = () => {
     page: "policies",
   });
   const [newFile, setNewFile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
   useEffect(() => {
     setFade(open);
   }, [open]);
 
   // Fetch records (only policies)
   const fetchData = async () => {
-    const records = await pb.collection("meetings_policies_stock_exchange_open_offer").getFullList(
-      {
-        sort: "sno",
-        filter: 'page = "policies"',
-      },
-      { requestKey: null }
-    );
+    const records = await pb
+      .collection("meetings_policies_stock_exchange_open_offer")
+      .getFullList(
+        {
+          sort: "sno",
+          filter: 'page = "policies"',
+        },
+        { requestKey: null }
+      );
     setData(records);
   };
 
@@ -115,6 +128,7 @@ const Policies = () => {
   };
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
@@ -183,8 +197,12 @@ const Policies = () => {
                         )}
                       </td>
                       <td className="px-3 py-2">{item.page}</td>
-                      <td className="px-3 py-2 text-gray-500">{fmt(item.created)}</td>
-                      <td className="px-3 py-2 text-gray-500">{fmt(item.updated)}</td>
+                      <td className="px-3 py-2 text-gray-500">
+                        {fmt(item.created)}
+                      </td>
+                      <td className="px-3 py-2 text-gray-500">
+                        {fmt(item.updated)}
+                      </td>
                     </tr>
                   ))
                 )}
@@ -230,7 +248,9 @@ const Policies = () => {
                 className="w-full border px-3 py-2 rounded mb-4"
               />
 
-              <label className="block mb-2 text-sm font-medium">File (PDF)</label>
+              <label className="block mb-2 text-sm font-medium">
+                File (PDF)
+              </label>
               <div className="border p-3 rounded bg-white">
                 {editingRow && editingRow.file && !newFile && (
                   <div className="mb-2">

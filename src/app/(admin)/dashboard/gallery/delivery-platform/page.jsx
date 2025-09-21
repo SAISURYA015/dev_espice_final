@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const DeliveryPlatforms = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,17 @@ const DeliveryPlatforms = () => {
   // Form state
   const [newValues, setNewValues] = useState({});
   const [newIcon, setNewIcon] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Trigger fade when modal opens
   useEffect(() => {
@@ -105,6 +117,8 @@ const DeliveryPlatforms = () => {
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
 
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       {/* Header */}
@@ -176,13 +190,19 @@ const DeliveryPlatforms = () => {
                       <td className="px-3 py-2">
                         {item.own_icon ? (
                           <img
-                            src={`${pb.files.getURL(item, item.own_icon)}?thumb=64x0`}
+                            src={`${pb.files.getURL(
+                              item,
+                              item.own_icon
+                            )}?thumb=64x0`}
                             className="w-12 h-12 rounded object-cover mx-auto hover:scale-105 transition-all duration-200"
                             alt="Own Icon"
                             onClick={(e) => {
                               e.stopPropagation();
                               setImgOpen(
-                                `${pb.files.getURL(item, item.own_icon)}?thumb=1024x0`
+                                `${pb.files.getURL(
+                                  item,
+                                  item.own_icon
+                                )}?thumb=1024x0`
                               );
                             }}
                           />
@@ -300,7 +320,9 @@ const DeliveryPlatforms = () => {
 
                 {newIcon && (
                   <div className="flex items-center gap-2">
-                    <label className="text-xs text-gray-500">Uploaded Icon</label>
+                    <label className="text-xs text-gray-500">
+                      Uploaded Icon
+                    </label>
                     <img
                       src={URL.createObjectURL(newIcon)}
                       className="w-16 h-16 object-contain rounded border"

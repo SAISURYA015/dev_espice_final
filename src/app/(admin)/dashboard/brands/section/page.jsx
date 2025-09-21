@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 const AboutBrands = () => {
   const [data, setData] = useState([]);
@@ -15,6 +17,19 @@ const AboutBrands = () => {
   const [aboutDescription, setAboutDescription] = useState("");
   const [title2, setTitle2] = useState("");
   const [websiteLink, setWebsiteLink] = useState("");
+   const [loading, setLoading] = useState(true);
+   const router = useRouter();
+
+   // Handle authentication
+   useEffect(() => {
+     if (!pb.authStore.isValid) {
+       router.replace("/login");
+     } else {
+       setLoading(false);
+     }
+   }, []);
+
+
 
   // Trigger fade when modal opens
   useEffect(() => {
@@ -62,6 +77,9 @@ const AboutBrands = () => {
       alert("Error saving: " + err.message);
     }
   };
+
+    if (loading) return <div>Loading...</div>;
+
 
   return (
     <>

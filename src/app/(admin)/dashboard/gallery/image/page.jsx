@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { Plus, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const GalleryImage = () => {
   const [data, setData] = useState([]);
@@ -25,6 +26,17 @@ const GalleryImage = () => {
   const [active, setActive] = useState(true);
   const [existingImage, setExistingImage] = useState("");
   const [newImage, setNewImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Fetch data
   const fetchData = async () => {
@@ -133,6 +145,8 @@ const GalleryImage = () => {
     }
   };
 
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       {/* Header */}
@@ -189,13 +203,19 @@ const GalleryImage = () => {
                       <td className="px-3 py-2">
                         {item.image ? (
                           <img
-                            src={`${pb.files.getURL(item, item.image)}?thumb=64x0`}
+                            src={`${pb.files.getURL(
+                              item,
+                              item.image
+                            )}?thumb=64x0`}
                             className="w-12 h-12 rounded object-cover mx-auto hover:scale-105 transition-all duration-200"
                             alt="preview"
                             onClick={(e) => {
                               e.stopPropagation();
                               setImgOpen(
-                                `${pb.files.getURL(item, item.image)}?thumb=1024x0`
+                                `${pb.files.getURL(
+                                  item,
+                                  item.image
+                                )}?thumb=1024x0`
                               );
                             }}
                           />

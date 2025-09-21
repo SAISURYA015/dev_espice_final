@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const OpenOffer = () => {
   const [data, setData] = useState([]);
@@ -16,7 +17,17 @@ const OpenOffer = () => {
     page: "open-offer",
   });
   const [newFile, setNewFile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
   useEffect(() => {
     setFade(open);
   }, [open]);
@@ -117,6 +128,7 @@ const OpenOffer = () => {
   };
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>

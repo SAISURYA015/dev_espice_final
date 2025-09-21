@@ -5,19 +5,8 @@ import { Plus, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Investor = () => {
-  // const [loading, setLoading] = useState(true);
-  // const router = useRouter();
-
-  // // Handle authentication
-  // useEffect(() => {
-  //   if (!pb.authStore.isValid) {
-  //     router.replace("/login");
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
-  // if (loading) return <div>Loading...</div>;
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -26,6 +15,15 @@ const Investor = () => {
 
   const [fade, setFade] = useState(false);
   const [imgFade, setImgFade] = useState(false);
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Trigger fade when modal opens
   useEffect(() => {
@@ -170,6 +168,8 @@ const Investor = () => {
     }
   };
 
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       {/* Header */}
@@ -228,13 +228,19 @@ const Investor = () => {
                       <td className="px-3 py-2">
                         {item.image ? (
                           <img
-                            src={`${pb.files.getURL(item, item.image)}?thumb=64x0`}
+                            src={`${pb.files.getURL(
+                              item,
+                              item.image
+                            )}?thumb=64x0`}
                             className="w-12 h-12 rounded object-cover mx-auto hover:scale-105 transition-all duration-200"
                             alt="preview"
                             onClick={(e) => {
                               e.stopPropagation();
                               setImgOpen(
-                                `${pb.files.getURL(item, item.image)}?thumb=1024x0`
+                                `${pb.files.getURL(
+                                  item,
+                                  item.image
+                                )}?thumb=1024x0`
                               );
                             }}
                           />
@@ -264,7 +270,9 @@ const Investor = () => {
       {/* Modal for Add/Edit */}
       {open && (
         <div
-          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/40 transition-opacity duration-100 ${fade ? "opacity-100" : "opacity-0"}`}
+          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/40 transition-opacity duration-100 ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
           onClick={() => {
             // if (sno || title || newImage) {
             //   const confirmStopChanging = confirm(
@@ -276,7 +284,9 @@ const Investor = () => {
           }}
         >
           <div
-            className={`relative bg-gray-50 rounded p-6 w-[512px] shadow transform transition-transform duration-100 ${fade ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"}`}
+            className={`relative bg-gray-50 rounded p-6 w-[512px] shadow transform transition-transform duration-100 ${
+              fade ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-lg font-semibold mb-4">
@@ -386,14 +396,18 @@ const Investor = () => {
       {/* Preview for Image */}
       {imgOpen && (
         <div
-          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/40 transition-opacity duration-100 ${imgFade ? "opacity-100" : "opacity-0"}`}
+          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/40 transition-opacity duration-100 ${
+            imgFade ? "opacity-100" : "opacity-0"
+          }`}
           onClick={() => setImgOpen("")}
         >
           <div
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className={`relative rounded w-[80dvw] md:w-auto md:h-[60dvh] transform transition-transform duration-100 ${imgFade ? "translate-y-0 opacity-100" : "-translate-y-5 opacity-0"}`}
+            className={`relative rounded w-[80dvw] md:w-auto md:h-[60dvh] transform transition-transform duration-100 ${
+              imgFade ? "translate-y-0 opacity-100" : "-translate-y-5 opacity-0"
+            }`}
           >
             <img
               src={imgOpen}

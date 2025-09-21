@@ -5,19 +5,8 @@ import { Plus, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Leadership = () => {
-  // const [loading, setLoading] = useState(true);
-  // const router = useRouter();
-
-  // // Handle authentication
-  // useEffect(() => {
-  //   if (!pb.authStore.isValid) {
-  //     router.replace("/login");
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
-  // if (loading) return <div>Loading...</div>;
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -26,6 +15,15 @@ const Leadership = () => {
 
   const [fade, setFade] = useState(false);
   const [imgFade, setImgFade] = useState(false);
+
+  // Handle authentication
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   // Trigger fade when modal opens
   useEffect(() => {
@@ -129,6 +127,8 @@ const Leadership = () => {
       alert("Error deleting leader: " + err.message);
     }
   };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
