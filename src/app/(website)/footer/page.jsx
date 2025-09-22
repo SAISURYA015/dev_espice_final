@@ -31,9 +31,6 @@ export default function Footer() {
           brands: brandsRes,
         });
 
-        console.log({
-          brands: brandsRes,
-        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }

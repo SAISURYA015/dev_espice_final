@@ -18,7 +18,6 @@ const Login = () => {
         username, // username or email
         password
       );
-      console.log(authData);
 
       // Redirect (example to dashboard page)
       router.push("/dashboard");

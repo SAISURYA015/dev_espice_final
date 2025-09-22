@@ -12,7 +12,6 @@ const banners = await pb.collection("banners").getFullList(200, {
   sort: "sno",
   filter: 'page = "investor"',
 });
-console.log(banners);
 
 export default function RootLayout({ children }) {
   return (

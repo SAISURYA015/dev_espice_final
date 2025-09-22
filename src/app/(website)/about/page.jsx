@@ -38,11 +38,7 @@ const About = () => {
           leaders: leadersRes,
         });
 
-        console.log({
-          banners: bannersRes,
-          brands: brandsRes,
-          leaders: leadersRes,
-        });
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

@@ -25,11 +25,6 @@ const YourComponent = () => {
           banners: bannersRes,
           brands: brandsRes,
         });
-
-        console.log({
-          banners: bannersRes,
-          brands: brandsRes,
-        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -82,12 +82,7 @@ const Home = () => {
           videos: videosRes,
         });
 
-        console.log({
-          banners: bannersRes,
-          brands: brandsRes,
-          images: imagesRes,
-          videos: videosRes,
-        });
+       
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
