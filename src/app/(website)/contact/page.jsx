@@ -217,7 +217,7 @@ const Contact = () => {
                 ></textarea>
 
                 <ReCAPTCHA
-                  sitekey="6LcQgNArAAAAAI_gKGNOx4f4Swqe9b3m9NyuOsGb"
+                  sitekey="6Le0arsrAAAAAC5JQIbZSX7BHy2iggHfIAC0NTXS"
                   onChange={(value) => setCaptchaValue(value)}
                 />
 

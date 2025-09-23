@@ -148,31 +148,6 @@ export default function Footer() {
                 ) : (
                   <></>
                 )}
-                {/* <a href="/brands/wing">
-                  <li className={getLinkClass("/brands/wing")}>Wing Zone</li>
-                </a>
-                <a href="/brands/blaze">
-                  <li className={getLinkClass("/brands/blaze")}>
-                    Blaze Kebabs
-                  </li>
-                </a>
-                <a href="/brands/etouch">
-                  <li className={getLinkClass("/brands/etouch")}>eTouch</li>
-                </a>
-                <a href="/brands/xora">
-                  <li className={getLinkClass("/brands/xora")}>Xora</li>
-                </a>
-                <a href="/brands/salud">
-                  <li className={getLinkClass("/brands/salud")}>Salud</li>
-                </a>
-                <a href="/brands/sunburn">
-                  <li className={getLinkClass("/brands/sunburn")}>
-                    Sunburn Union
-                  </li>
-                </a>
-                <a href="/brands/teksoft">
-                  <li className={getLinkClass("/brands/teksoft")}>Teksoft</li>
-                </a> */}
               </ul>
             </div>
           </div>
@@ -207,7 +182,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 text-sm">
-        <div className="text-gray-300 text-center md:text-left mb-3 md:mb-0 col-span-9 flex justify-center gap-2">
+        <div className="text-gray-300 text-center md:text-left mb-3 md:mb-0 col-span-9 md:flex justify-center gap-2">
           <div>© All rights reserved to</div>{" "}
           <div className="font-bold"> Spice Lounge Food Works, Ltd.</div>{" "}
           <div>@2019</div>

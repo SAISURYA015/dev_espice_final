@@ -95,7 +95,7 @@ const Corporate = () => {
       </div>
       <div className="flex justify-center items-center">
         <div className="border border-gray-500 rounded-2xl p-5 shadow hover:shadow-md hover:border-red-500 transition-all bg-white">
-          <h3 className="font-semibold underline text-blue-800 mb-2">
+          <h3 className="font-semibold underline text-[#223972] mb-2 text-xl">
             Key Managerial Personnel
           </h3>
           <ul>

@@ -139,18 +139,16 @@ const Gallery = () => {
           GALLERY
         </h2>
         <div className="flex flex-wrap justify-center items-center gap-2 mt-4">
-          <div
+          <a
             className={
               galactive == "img"
                 ? "bg-[#152768] text-white px-3 py-2 rounded cursor-pointer"
                 : "hover:bg-[#152768] hover:text-white px-3 py-2 rounded border border-[#152768] cursor-pointer"
             }
-            onClick={() => {
-              setGalactive("img");
-            }}
+            href="/gallery/images"
           >
             Images
-          </div>
+          </a>
           <div
             className={
               galactive == "vid"
@@ -390,7 +388,7 @@ const Gallery = () => {
       {/* Preview */}
       {videoOpen && (
         <div
-          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/80 transition-opacity duration-100 ${
+          className={`fixed inset-0 flex items-center justify-center z-50 bg-black transition-opacity duration-100 ${
             videoFade ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setVideoOpen("")}

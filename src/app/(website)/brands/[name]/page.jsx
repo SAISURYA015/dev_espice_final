@@ -14,7 +14,9 @@ export default async function BrandDetail({ params }) {
       pb
         .collection("brands")
         .getFullList(200, { sort: "sno", requestKey: null }),
-      pb.collection("brands").getFirstListItem(`name="${name.replaceAll("-", " ")}"`),
+      pb
+        .collection("brands")
+        .getFirstListItem(`name="${name.replaceAll("-", " ")}"`),
     ]);
 
     return (
@@ -59,6 +61,7 @@ export default async function BrandDetail({ params }) {
               )}
             </div>
           </section>
+
           {/* brand delight */}
           <section className="mx-auto pt-4 pb-2 mb-2">
             <h2 className="text-2xl font-bold mb-4 text-center">
@@ -79,8 +82,8 @@ export default async function BrandDetail({ params }) {
             />
           </section>
           {/* delight webslit link */}
-          <div className="flex items-center justify-center border-y border-black">
-            For more information,
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:gap-2 items-center justify-center border-y border-black">
+            <p>For more information,</p>
             <a
               target="_blank"
               href={brandRes.websiteLink}
@@ -88,8 +91,9 @@ export default async function BrandDetail({ params }) {
             >
               click here
             </a>
-            to visit our website
+            <p>to visit our website</p>
           </div>
+
           {/* what is brands */}
           <section className="mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-4">
             <div className="flex items-baseline justify-center">

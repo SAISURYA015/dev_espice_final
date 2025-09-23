@@ -169,18 +169,16 @@ const Gallery = () => {
           >
             Images
           </div>
-          <div
+          <a
             className={
               galactive == "vid"
                 ? "bg-[#152768] text-white px-3 py-2 rounded cursor-pointer"
                 : "hover:bg-[#152768] hover:text-white px-3 py-2 rounded border border-[#152768] cursor-pointer"
             }
-            onClick={() => {
-              setGalactive("vid");
-            }}
+            href="/gallery/videos"
           >
             Videos
-          </div>
+          </a>
           <div
             className={
               galactive == "soc"

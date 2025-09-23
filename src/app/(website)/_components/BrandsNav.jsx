@@ -24,18 +24,18 @@ export default function BrandsNav({ brands, activeName }) {
         showNav ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 items-center py-2 gap-8">
+      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-8 items-center py-2 gap-4 md:gap-6">
         {brands.map((brand) => (
           <a href={`/brands/${brand.name.replaceAll(" ", "-")}`} key={brand.id}>
             <div
-              className={`flex items-center justify-center rounded-2xl cursor-pointer transition border-2 px-2 ${
+              className={`flex items-center justify-center rounded-lg md:rounded-2xl cursor-pointer transition border-2 px-2 ${
                 activeName === brand.name.replaceAll(" ", "-")
                   ? "border-orange-500"
                   : "border-gray-300"
               }`}
             >
               <img
-                className="h-24 lg:h-20 object-contain"
+                className="h-12 lg:h-20 object-contain"
                 src={pb.files.getURL(brand, brand.logo)}
                 alt={brand.id}
               />

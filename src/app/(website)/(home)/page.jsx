@@ -98,7 +98,7 @@ const Home = () => {
   return (
     <div className="bg-orange-50">
       <NavBar />
-      <Carousel slides={data.banners} slideInterval={3000} />
+      <Carousel slideImages={data.banners} slideInterval={3000} />
 
       {/* brands logos */}
       <div className="max-w-7xl mx-auto text-center">
@@ -218,7 +218,6 @@ const Home = () => {
         </div>
       </section>
 
-    
       {/* our brands */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
         <h2 className="text-xl lg:text-2xl font-bold mb-4 tracking-wide">
