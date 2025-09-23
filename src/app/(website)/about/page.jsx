@@ -61,9 +61,12 @@ const About = () => {
   return (
     <div>
       <NavBar />
+
       <div className="mt-16 max-w-7xl mx-auto mb-4">
         <img className="w-full" src={data.banners[0]} alt="" />
       </div>
+
+    
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-orange-200/50">
         <h2 className="text-xl lg:text-2xl font-bold mb-4 tracking-wide text-center uppercase">
           <span className="text-[#d13b2a]">Our </span>
@@ -110,7 +113,7 @@ const About = () => {
                   className="flex items-center justify-center border border-gray-300 rounded-2xl p-2"
                 >
                   <img
-                    className="h-24 lg:h-20 object-contain"
+                    className="h-28 w-28 lg:h-20 object-contain"
                     src={pb.files.getURL(brand, brand.logo)}
                     alt=""
                   />

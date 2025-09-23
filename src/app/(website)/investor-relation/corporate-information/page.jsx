@@ -16,21 +16,17 @@ const Corporate = () => {
           pb
             .collection("corporate_info")
             .getFullList(200, { sort: "sno", requestKey: null }),
-          pb
-            .collection("leaders")
-            .getFullList(200, {
-              sort: "sno",
-              filter: 'page = "investor"',
-              requestKey: null,
-            }),
+          pb.collection("leaders").getFullList(200, {
+            sort: "sno",
+            filter: 'page = "investor"',
+            requestKey: null,
+          }),
         ]);
-
 
         setData({
           address: addressRes,
           leaders: leadersRes,
         });
-       
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

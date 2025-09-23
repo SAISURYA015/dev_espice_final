@@ -25,7 +25,7 @@ export default function Carousel({ slides = [], slideInterval = 3000 }) {
   if (length === 0) return null;
 
   return (
-    <div className="mt-16 max-w-7xl mx-auto pb-4 relative">
+    <div className="mt-16 max-w-7xl mx-auto relative">
       {/* Banner Slider */}
       <div
         className="overflow-hidden"

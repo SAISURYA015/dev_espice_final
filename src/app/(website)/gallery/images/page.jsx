@@ -406,7 +406,7 @@ const Gallery = () => {
       </div>
       {imgOpen && (
         <div
-          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/80 transition-opacity duration-100 ${
+          className={`fixed inset-0 flex items-center justify-center z-50 bg-black transition-opacity duration-100 ${
             imgFade ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setImgOpen("")}
@@ -451,58 +451,6 @@ const Gallery = () => {
         </div>
       )}
 
-      {/* Preview */}
-      {videoOpen && (
-        <div
-          className={`fixed inset-0 flex items-center justify-center z-50 bg-black/80 transition-opacity duration-100 ${
-            videoFade ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setVideoOpen("")}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className={`relative flex items-center justify-center rounded w-[80dvw] md:w-[85dvw] md:h-[90dvh] transform transition-transform duration-100 ${
-              videoFade
-                ? "translate-y-0 opacity-100"
-                : "-translate-y-5 opacity-0"
-            }`}
-            // className={`relative rounded w-[80dvw] md:w-auto md:h-[70dvh] transform transition-transform duration-100 ${
-            //   videoFade
-            //     ? "translate-y-0 opacity-100"
-            //     : "-translate-y-5 opacity-0"
-            // }`}
-          >
-            {/* Prev Button */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 text-white px-3 py-2 rounded-r-lg cursor-pointer"
-            >
-              <ChevronLeft size={64} />
-            </button>
-
-            <video
-              src={videoOpen}
-              controls
-              className="w-full h-full object-contain"
-            />
-
-            {/* Next Button */}
-            <button
-              onClick={handleNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 text-white px-3 py-2 rounded-l-lg cursor-pointer"
-            >
-              <ChevronRight size={64} />
-            </button>
-
-            <button
-              onClick={() => setVideoOpen("")}
-              className="absolute top-0 right-8 p-1 rounded-bl-xl bg-red-600 text-white"
-            >
-              <X />
-            </button>
-          </div>
-        </div>
-      )}
       <Footer />
     </div>
   );

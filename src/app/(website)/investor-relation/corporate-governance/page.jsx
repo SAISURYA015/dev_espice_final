@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import pb from "../../_lib/pb";
+import ShareHolding from "../shareholder/page";
 
 const CorporateGov = () => {
   const [data, setData] = useState([]);
@@ -59,6 +60,7 @@ const CorporateGov = () => {
         {/* Concluding Statement */}
         <p className="text-gray-800">{data[0] && data[0].description2}</p>
       </div>
+      <ShareHolding />
     </div>
   );
 };

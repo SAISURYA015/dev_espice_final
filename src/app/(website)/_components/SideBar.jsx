@@ -88,7 +88,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="w-full lg:w-72 bg-gray-100 text-gray-600 flex flex-col border-r-[1.5px] z-40">
+      <div className="w-full lg:w-96 bg-gray-100 text-gray-600 flex flex-col border-r-[1.5px] z-40">
         {/* <p className="text-2xl text-center font-bold px-3 py-3 border-b border-gray-200 text-[#223972]">
           Spice Lounge
         </p> */}

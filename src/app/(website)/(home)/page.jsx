@@ -96,12 +96,13 @@ const Home = () => {
     );
 
   return (
-    <>
+    <div className="bg-orange-50">
       <NavBar />
       <Carousel slides={data.banners} slideInterval={3000} />
+
       {/* brands logos */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 items-center gap-2">
+      <div className="max-w-7xl mx-auto text-center">
+        <div className="p-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 items-center py-4 gap-2">
           {data.brands.length > 0 ? (
             data.brands.map((brand, index) => (
               <div
@@ -109,7 +110,7 @@ const Home = () => {
                 key={index}
               >
                 <img
-                  className="h-24 lg:h-20 object-contain p-2"
+                  className="h-24 lg:h-20 object-contain p-3"
                   src={pb.files.getURL(brand, brand.logo)}
                   alt={brand.name || "Brand"}
                 />
@@ -144,6 +145,7 @@ const Home = () => {
           entrepreneurs through sustainable, scalable franchise models.
         </p>
       </div>
+
       {/* Announcements */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
         <h2 className="text-xl lg:text-2xl font-bold text-[#d13b2a] mb-4  tracking-wide">
@@ -215,6 +217,8 @@ const Home = () => {
           </a>
         </div>
       </section>
+
+    
       {/* our brands */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
         <h2 className="text-xl lg:text-2xl font-bold mb-4 tracking-wide">
@@ -239,7 +243,7 @@ const Home = () => {
                   >
                     <div className="flex items-center justify-center">
                       <img
-                        className="h-24 p-2 object-contain"
+                        className="h-32 w-32 object-contain"
                         src={pb.files.getURL(brand, brand.logo)}
                         alt=""
                       />
@@ -620,7 +624,7 @@ const Home = () => {
         )}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

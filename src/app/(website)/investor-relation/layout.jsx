@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         </main>
       </div> */}
       {/* Main Content Area */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 max-w-7xl mx-auto py-5">
+      <div className="grid grid-cols-1 lg:grid-cols-4 max-w-7xl mx-auto py-5 px-4 md:px-12 py-8 gap-8">
         {/* Sidebar */}
         <div className="lg:col-span-1">
           <Sidebar />

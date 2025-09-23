@@ -61,7 +61,7 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q1)}
                   >
-                    Q1
+                    30.06.{report.title.split("-")[0]}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center">
@@ -70,7 +70,7 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q2)}
                   >
-                    Q2
+                    30.09.{report.title.split("-")[0]}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center">
@@ -79,7 +79,7 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q3)}
                   >
-                    Q3
+                    30.12.{report.title.split("-")[0]}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center">
@@ -88,7 +88,7 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q4)}
                   >
-                    Q4
+                    30.03.{Number(report.title.split("-")[0]) + 1}
                   </a>
                 </td>
               </tr>
