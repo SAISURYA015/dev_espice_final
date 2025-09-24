@@ -1,5 +1,6 @@
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
+import ScrollToTopButton from "./_components/ScrollToTopButton";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -58,6 +59,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.variable} ${roboto.variable} antialiased`}>
         {children}
+        <ScrollToTopButton />
       </body>
     </html>
   );
