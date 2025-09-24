@@ -46,7 +46,7 @@ const CorporateGov = () => {
   return (
     <div>
       <div className="px-4">
-        <h2 className="text-2xl text-[#223972] mt-3 font-semibold text-center">
+        <h2 className="text-lg lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
           Corporate Governance
         </h2>
       </div>
@@ -56,7 +56,7 @@ const CorporateGov = () => {
 
         {/* Key Governance Principles */}
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-blue-900 mb-4">
+          <h2 className="text-md lg:text-2xl font-semibold text-blue-900 mb-4">
             Key Governance Principles:
           </h2>
           <ul className="list-disc pl-5 space-y-2 text-gray-700">

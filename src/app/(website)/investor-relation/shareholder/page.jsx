@@ -44,7 +44,7 @@ const ShareHolding = () => {
   return (
     <div>
       <div className="px-4">
-        <h2 className="text-2xl text-[#223972] mt-3 font-semibold text-center">
+        <h2 className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
           Shareholding Pattern
         </h2>
       </div>
@@ -62,7 +62,7 @@ const ShareHolding = () => {
           <tbody>
             {data.map((report) => (
               <tr className="text-slate-800" key={report.id}>
-                <td className="px-4 py-2 font-semibold text-[#152768] text-center">
+                <td className="px-4 py-2  font-semibold text-[#152768] text-center">
                   {report.title}
                 </td>
                 <td className="px-4 py-2 text-center">

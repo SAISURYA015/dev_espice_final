@@ -45,7 +45,7 @@ const Annual = () => {
   return (
     <div className="flex flex-col items-center px-4">
       {/* Title */}
-      <div className="text-2xl text-[#223972] mt-3 font-semibold text-center">
+      <div className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
         Annual Reports
       </div>
 

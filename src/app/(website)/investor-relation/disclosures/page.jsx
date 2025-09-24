@@ -40,12 +40,12 @@ const Disclosures = () => {
     );
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-semibold text-center text-[#223972] mb-4">
+    <div className="lg:p-4">
+      <h2 className="text-md lg:text-2xl font-semibold text-center text-[#223972] mb-4">
         Disclosures under Regulation 46
       </h2>
 
-      <div className="overflow-x-auto">
+      <div className="text-sm md:text-md">
         <table className="min-w-full border border-gray-300 table-auto">
           <thead className="bg-gray-100 text-gray-700">
             <tr>

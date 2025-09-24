@@ -56,7 +56,7 @@ const OpenOffer = () => {
       {isActive && openOfferInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#223972] border-b-2 border-gray-300 pb-2 inline-block">
+            <h2 className="text-md lg:text-2xl font-bold text-[#223972] border-b-2 border-gray-300 pb-2 inline-block">
               Open offer 2024
             </h2>
           </header>
