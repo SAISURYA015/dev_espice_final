@@ -155,7 +155,7 @@ export default function NavBar() {
             <Link className="underline px-4" href="/disclaimer">
               Disclaimer
             </Link>
-            <Link className="underline" href="/privacypolicy">
+            <Link className="underline" href="/privacy">
               Privacy Policy
             </Link>
           </div>

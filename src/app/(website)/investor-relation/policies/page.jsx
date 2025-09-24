@@ -33,8 +33,18 @@ const Policies = () => {
 
   if (loading)
     return (
-      <div className="h-screen w-full flex justify-center items-center bg-gray-50">
-        <div className="w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-700 rounded-full animate-spin"></div>
+      <div className="h-dvh flex justify-center items-center bg-white">
+        <div className="relative w-32 h-32 flex justify-center items-center">
+          {/* Spinning border */}
+          <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
+
+          {/* Logo inside */}
+          <img
+            src="/images/logo.png"
+            alt="Spice Lounge Logo"
+            className="w-20 h-20 object-contain"
+          />
+        </div>
       </div>
     );
 

@@ -44,25 +44,6 @@ const Meetings = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Helper → clean filename into readable label
-//   const formatFileName = (file) => {
-//   return file
-//     .replace(/^\d+_/, "")                 // remove starting number + underscore
-//     .replace(/_[a-z0-9]{6,}\.\d{4}\.pdf$/i, ".pdf") // remove hash before year
-//     .replace(/_/g, " ")                   // underscores → spaces
-//     .replace(/\.pdf$/i, "")               // remove .pdf
-//     .trim();
-// };
-
-// const formatFileName = (file) => {
-//   return file
-//     .replace(/^\d+_/, "") // remove starting number + underscore
-//     .replace(/_[a-z0-9]{6,}\.\d{4}\.pdf$/i, ".pdf") // remove hash before year
-//     .replace(/_/g, " ") // underscores → spaces
-//     .replace(/\.pdf$/i, "") // remove .pdf
-//     .trim();
-// };
-
 const formatFileName = (file, sno) => {
   // remove leading serial number if it's in filename itself
   let name = file.replace(/^\d+_/, "");

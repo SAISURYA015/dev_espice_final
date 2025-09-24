@@ -44,7 +44,10 @@ export default function Footer() {
     { name: "About us", path: "/about" },
     { name: "Franchises", path: "/franchises" },
     { name: "Gallery", path: "/gallery" },
-    { name: "Investor Relations", path: "/investor-relation" },
+    {
+      name: "Investor Relations",
+      path: "/investor-relation/corporate-information",
+    },
     { name: "Contact Us", path: "/contact" },
   ];
 
