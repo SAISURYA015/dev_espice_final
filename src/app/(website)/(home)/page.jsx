@@ -74,8 +74,6 @@ const Home = () => {
           images: imagesRes,
           videos: videosRes,
         });
-
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -497,8 +495,8 @@ const Home = () => {
         ) : galactive == "soc" ? (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <h2 className="text-2xl text-center">Follow Our brands</h2>
-            <p className="text-center my-4">
-              Explore all of our unique brands across your favourite platform
+            <p className="text-center mb-4">
+              Explore All of Our Unique Brands Across your Favourite Platform
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
               {data.brands.map((brand) => (
@@ -558,7 +556,7 @@ const Home = () => {
             <p className="text-center">
               Order from Our Unique Brands on Your Favorite Delivery Apps
             </p>
-            <div className="mt-8 mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full">
+            <div className="mt-4 mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full">
               {data.brands.map((brand) => {
                 if (
                   brand.name.toUpperCase() === "ETOUCH" ||
