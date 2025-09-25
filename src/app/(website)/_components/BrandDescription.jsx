@@ -16,8 +16,8 @@ export default function BrandDescription({ image, title, description }) {
 
       <h2 className="font-bold text-xl">{title}</h2>
 
-      <p className="text-justify">
-        {isExpanded ? description : description?.slice(0, 200)}
+      <p className="">
+        {isExpanded ? description : description?.slice(0, 120)}
         {description?.length > 200 && (
           <span
             onClick={toggleCard}

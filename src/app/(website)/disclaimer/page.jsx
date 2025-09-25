@@ -65,11 +65,9 @@ const sections = [
 
 export default function LegalDisclaimer() {
   return (
-    <>
+    <div className="bg-orange-50">
       <NavBar />
       <main className="mt-16 max-w-7xl mx-auto px-4 py-10 flex gap-8">
-        
-
         {/* Content */}
         <section className="flex-1">
           <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
@@ -95,6 +93,6 @@ export default function LegalDisclaimer() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

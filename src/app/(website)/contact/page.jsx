@@ -106,7 +106,7 @@ const Contact = () => {
 
   if (loading)
     return (
-      <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+      <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
         <div className="relative w-32 h-32 flex justify-center items-center">
           {/* Spinning border */}
           <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -122,13 +122,13 @@ const Contact = () => {
     );
 
   return (
-    <div>
+    <div className="bg-orange-50">
       <NavBar />
       <div className="mt-16 w-full max-w-7xl mx-auto">
         <img src={data.banners[0]} alt="" />
       </div>
 
-      <div className="flex items-center justify-center bg-gray-50 py-10 px-4">
+      <div className="flex items-center justify-center py-10 px-4 bg-orange-50">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl w-full">
           {/* Left Info Card */}
           <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center md:items-start text-center md:text-left">
@@ -136,7 +136,7 @@ const Contact = () => {
               <img
                 src="/images/shared/logos/logo.png"
                 alt="Logo"
-                className="w-64 h-auto mb-4"
+                className="w-70 h-auto mb-4"
               />
             </div>
             <div className="p-4">

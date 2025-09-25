@@ -26,7 +26,7 @@ const ShareHolding = () => {
 
   if (loading)
     return (
-      <div className="h-dvh flex justify-center items-center bg-white">
+      <div className="h-dvh flex justify-center items-center bg-orange-50">
         <div className="relative w-32 h-32 flex justify-center items-center">
           {/* Spinning border */}
           <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -42,8 +42,8 @@ const ShareHolding = () => {
     );
 
   return (
-    <div>
-      <div className="px-4">
+    <div className="bg-orange-50">
+      <div className="px-4 bg-orange-50">
         <h2 className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
           Shareholding Pattern
         </h2>
@@ -52,20 +52,20 @@ const ShareHolding = () => {
         <table className="min-w-full table-fixed border-collapse">
           <thead>
             <tr className="bg-slate-100 text-slate-700 text-center">
-              <th className="w-1/5 px-4 py-2 font-medium">Year</th>
-              <th className="w-1/5 px-4 py-2 font-medium">Q1</th>
-              <th className="w-1/5 px-4 py-2 font-medium">Q2</th>
-              <th className="w-1/5 px-4 py-2 font-medium">Q3</th>
-              <th className="w-1/5 px-4 py-2 font-medium">Q4</th>
+              <th className="w-1/5 px-4 py-2 font-medium border-4">Year</th>
+              <th className="w-1/5 px-4 py-2 font-medium border-4">Q1</th>
+              <th className="w-1/5 px-4 py-2 font-medium border-4">Q2</th>
+              <th className="w-1/5 px-4 py-2 font-medium border-4">Q3</th>
+              <th className="w-1/5 px-4 py-2 font-medium border-4">Q4</th>
             </tr>
           </thead>
           <tbody>
             {data.map((report) => (
               <tr className="text-slate-800" key={report.id}>
-                <td className="px-4 py-2  font-semibold text-[#152768] text-center">
+                <td className="px-4 py-2  font-semibold text-[#152768] text-center border-2">
                   {report.title}
                 </td>
-                <td className="px-4 py-2 text-center">
+                <td className="px-4 py-2 text-center border-2">
                   <a
                     target="_blank"
                     className="text-red-500"
@@ -74,7 +74,7 @@ const ShareHolding = () => {
                     30.06.{report.title.split("-")[0]}
                   </a>
                 </td>
-                <td className="px-4 py-2 text-center">
+                <td className="px-4 py-2 text-center border-2">
                   <a
                     target="_blank"
                     className="text-red-500"
@@ -83,7 +83,7 @@ const ShareHolding = () => {
                     30.09.{report.title.split("-")[0]}
                   </a>
                 </td>
-                <td className="px-4 py-2 text-center">
+                <td className="px-4 py-2 text-center border-2">
                   <a
                     target="_blank"
                     className="text-red-500"
@@ -92,7 +92,7 @@ const ShareHolding = () => {
                     31.12.{report.title.split("-")[0]}
                   </a>
                 </td>
-                <td className="px-4 py-2 text-center">
+                <td className="px-4 py-2 text-center border-2">
                   <a
                     target="_blank"
                     className="text-red-500"

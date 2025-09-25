@@ -89,7 +89,7 @@ const Home = () => {
   if (loading)
     return (
       <>
-        <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+        <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
           <div className="relative w-32 h-32 flex justify-center items-center">
             {/* Spinning border */}
             <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -440,7 +440,7 @@ const Home = () => {
                   <a href="/gallery/images" key={image.id}>
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
-                        className="object-cover w-full h-64"
+                        className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
                         src={pb.files.getURL(image, image.image)}
                         alt={image.name || "Brand"}
                       />
@@ -468,7 +468,7 @@ const Home = () => {
                     <a href="/gallery/videos" key={video.id}>
                       <div key={video.id} className="px-2">
                         <video
-                          className="w-full h-64 object-cover rounded-md"
+                          className="w-full h-64 object-cover rounded-md hover:scale-105 hover:cursor-pointer"
                           crossOrigin="anonymous"
                         >
                           <source
@@ -504,7 +504,7 @@ const Home = () => {
               {data.brands.map((brand) => (
                 <div
                   key={brand.id}
-                  className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col items-center"
+                  className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md hover:border-[#e23130] transition-shadow duration-200 p-6 flex flex-col items-center"
                 >
                   <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center">
                     {brand.name}
@@ -569,7 +569,7 @@ const Home = () => {
                   return (
                     <div
                       key={brand.id}
-                      className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col items-center"
+                      className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md hover:border-[#e23130] transition-shadow duration-200 p-6 flex flex-col items-center"
                     >
                       <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center capitalize">
                         {brand.name}

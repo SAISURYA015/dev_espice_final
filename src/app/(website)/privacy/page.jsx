@@ -58,7 +58,7 @@ const sections = [
 
 export default function PrivacyPolicy() {
   return (
-    <>
+    <div className="bg-orange-50">
       <NavBar />
       <section className="mt-16 max-w-7xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
@@ -80,6 +80,6 @@ export default function PrivacyPolicy() {
         </div>
       </section>
       <Footer />
-    </>
+    </div>
   );
 }

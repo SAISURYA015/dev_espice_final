@@ -139,7 +139,7 @@ const Gallery = () => {
   if (loading)
     return (
       <>
-        <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+        <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
           <div className="relative w-32 h-32 flex justify-center items-center">
             {/* Spinning border */}
             <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -156,7 +156,7 @@ const Gallery = () => {
     );
 
   return (
-    <div>
+    <div className="bg-orange-50">
       <NavBar />
       <div className="mt-16 max-w-7xl mx-auto mb-4">
         <img className="w-full" src={data.banners[0]} alt={data.banners.page} />
@@ -226,7 +226,7 @@ const Gallery = () => {
                   >
                     <img
                       src={pb.files.getURL(image, image.image)}
-                      className="object-cover w-full h-64"
+                      className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
                       alt="preview"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -263,6 +263,7 @@ const Gallery = () => {
                         <source
                           src={pb.files.getURL(video, video.video)}
                           type="video/mp4"
+                          className=""
                         />
                         Your browser does not support the video tag.
                       </video>
@@ -284,7 +285,7 @@ const Gallery = () => {
               {data.brands.map((brand) => (
                 <div
                   key={brand.id}
-                  className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col items-center"
+                  className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md hover:border-[#e23130] transition-shadow duration-200 p-6 flex flex-col items-center"
                 >
                   <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center">
                     {brand.name}
@@ -349,7 +350,7 @@ const Gallery = () => {
                   return (
                     <div
                       key={brand.id}
-                      className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 flex flex-col items-center"
+                      className="bg-white border border-yellow-300 rounded-lg shadow-sm hover:shadow-md hover:border-[#e23130]  transition-shadow duration-200 p-6 flex flex-col items-center"
                     >
                       <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center capitalize">
                         {brand.name}

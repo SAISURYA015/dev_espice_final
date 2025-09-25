@@ -128,7 +128,7 @@ const Franchise = () => {
 
   if (loading)
     return (
-      <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+      <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
         <div className="relative w-32 h-32 flex justify-center items-center">
           {/* Spinning border */}
           <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -144,7 +144,7 @@ const Franchise = () => {
     );
 
   return (
-    <div>
+    <div className="bg-orange-50">
       <NavBar />
 
       <div className="mt-16 max-w-7xl mx-auto mb-4">

@@ -37,8 +37,6 @@ const About = () => {
           brands: brandsRes,
           leaders: leadersRes,
         });
-
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -52,7 +50,7 @@ const About = () => {
   if (loading)
     return (
       <>
-        <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+        <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
           <div className="relative w-32 h-32 flex justify-center items-center">
             {/* Spinning border */}
             <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -69,14 +67,13 @@ const About = () => {
     );
 
   return (
-    <div>
+    <div className="bg-orange-50">
       <NavBar />
 
       <div className="mt-16 max-w-7xl mx-auto mb-4">
         <img className="w-full" src={data.banners[0]} alt="" />
       </div>
 
-    
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-orange-200/50">
         <h2 className="text-xl lg:text-2xl font-bold mb-4 tracking-wide text-center uppercase">
           <span className="text-[#d13b2a]">Our </span>
@@ -88,14 +85,14 @@ const About = () => {
           At
           <span className="text-[#d13b2a]"> Spice </span>
           <span className="text-[#152768]">Lounge</span>, we bring together
-          global dining and lifestyle experiences under one banner. FromU.S.
-          brands like Buffalo Wild Wings and Wing Zone, toMiddle Eastern flavors
-          with Blaze Kebabs, and premium pubs and nightlife concepts like Xora,
-          Salud, and Sunburn Union we deliver taste and entertainment at scale.
-          Our vision is to build a multi category food and beverage powerhouse
-          driven by culinary innovation, vibrant pub culture, and technology
-          platforms like eTouch and TekSoft. With8 powerful brands, we are
-          redefining hospitality and empowering entrepreneurs through
+          global dining and lifestyle experiences under one banner. From U.S.
+          brands like Buffalo Wild Wings and Wing Zone, to Middle Eastern
+          flavors with Blaze Kebabs, and premium pubs and nightlife concepts
+          like Xora, Salud, and Sunburn Union we deliver taste and entertainment
+          at scale. Our vision is to build a multi category food and beverage
+          power house driven by culinary innovation, vibrant pub culture, and
+          technology platforms like eTouch and TekSoft. With 8 powerful brands,
+          we are redefining hospitality and empowering entrepreneurs through
           sustainable, scalable franchise models.
         </p>
       </div>

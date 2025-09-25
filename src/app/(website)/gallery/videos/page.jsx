@@ -121,7 +121,7 @@ const Gallery = () => {
   if (loading)
     return (
       <>
-        <div className="h-dvh w-dvw flex justify-center items-center bg-white">
+        <div className="h-dvh w-dvw flex justify-center items-center bg-orange-50">
           <div className="relative w-32 h-32 flex justify-center items-center">
             {/* Spinning border */}
             <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -138,7 +138,7 @@ const Gallery = () => {
     );
 
   return (
-    <div>
+    <div className="bg-orange-50">
       <NavBar />
       <div className="mt-16 max-w-7xl mx-auto mb-4">
         <img className="w-full" src={data.banners[0]} alt={data.banners.page} />
@@ -235,7 +235,7 @@ const Gallery = () => {
                   {data.videos.map((video) => (
                     <div key={video.id} className="px-2">
                       <video
-                        className="w-full h-64 object-cover rounded-md"
+                        className="w-full h-64 object-cover rounded-md hover:scale-105 hover:cursor-pointer"
                         crossOrigin="anonymous"
                         onClick={(e) => {
                           e.stopPropagation();

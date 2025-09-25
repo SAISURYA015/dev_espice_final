@@ -87,16 +87,16 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className="bg-orange-50">
       <div className="w-full lg:w-96 bg-gray-100 text-gray-600 flex flex-col border-r-[1.5px] z-40">
         {/* <p className="text-2xl text-center font-bold px-3 py-3 border-b border-gray-200 text-[#223972]">
           Spice Lounge
         </p> */}
 
-        <div className="bg-white rounded p-4 lg:col-span-1">
+        <div className="bg-orange-50 rounded p-4 lg:col-span-1">
           <ul className="space-y-2">
             {menuItems.map((tab) => {
-               const Icon = tab.icon; 
+              const Icon = tab.icon;
               return (
                 <li key={tab.title}>
                   <a
@@ -107,7 +107,7 @@ export default function Sidebar() {
                         : "hover:bg-gray-200 text-gray-700"
                     }`}
                   >
-                    <Icon className="w-5 h-5" /> 
+                    <Icon className="w-5 h-5" />
                     <span className="text-sm">{tab.title}</span>
                   </a>
                 </li>
@@ -116,6 +116,6 @@ export default function Sidebar() {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -28,7 +28,7 @@ const CorporateGov = () => {
 
   if (loading)
     return (
-      <div className="h-dvh flex justify-center items-center bg-white">
+      <div className="h-dvh flex justify-center items-center bg-orange-50">
         <div className="relative w-32 h-32 flex justify-center items-center">
           {/* Spinning border */}
           <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -45,7 +45,7 @@ const CorporateGov = () => {
 
   return (
     <div>
-      <div className="px-4">
+      <div className="px-4 bg-orange-50">
         <h2 className="text-lg lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
           Corporate Governance
         </h2>

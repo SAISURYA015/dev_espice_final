@@ -27,7 +27,7 @@ const Annual = () => {
 
   if (loading)
     return (
-      <div className="h-dvh flex justify-center items-center bg-white">
+      <div className="h-dvh flex justify-center items-center bg-orange-50">
         <div className="relative w-32 h-32 flex justify-center items-center">
           {/* Spinning border */}
           <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
@@ -60,7 +60,7 @@ const Annual = () => {
             className="flex items-center gap-3 bg-white shadow-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-[#223972] transition"
           >
             <FileText className="w-6 h-6 text-[#223972]" />
-            <span className="text-gray-700 font-medium">{report.title}</span>
+            <span className="text-gray-700 font-medium text-[15px]">{report.title}</span>
           </a>
         ))}
       </div>

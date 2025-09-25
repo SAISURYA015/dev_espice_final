@@ -21,7 +21,7 @@ const data = [
 
 export default function BarChartCard() {
   return (
-    <div className="bg-white rounded-2xl shadow p-6 w-full max-w-7xl">
+    <div className="bg-orange-50 rounded-2xl shadow p-6 w-full max-w-7xl">
       {/* Title */}
       <h2 className="text-lg font-semibold text-gray-900">
         Bar Chart - Multiple

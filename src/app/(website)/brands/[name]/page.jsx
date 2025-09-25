@@ -87,7 +87,7 @@ export default async function BrandDetail({ params }) {
             <a
               target="_blank"
               href={brandRes.websiteLink}
-              className="text-center text-[#152768] font-bold mx-2"
+              className="text-center text-[#152768] font-bold"
             >
               click here
             </a>
