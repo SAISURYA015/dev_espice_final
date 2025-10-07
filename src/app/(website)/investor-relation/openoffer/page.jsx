@@ -52,7 +52,7 @@ const OpenOffer = () => {
   const isActive = pathname === "/investor-relation/openoffer";
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {isActive && openOfferInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">

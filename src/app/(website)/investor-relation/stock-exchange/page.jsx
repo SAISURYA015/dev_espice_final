@@ -52,7 +52,7 @@ const StockExchange = () => {
   const isActive = pathname === "/investor-relation/stock-exchange";
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {isActive && stockExchangeInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">

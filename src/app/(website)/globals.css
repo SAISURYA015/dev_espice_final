@@ -139,3 +139,9 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
 }
+
+.slick-track {
+  display: flex !important;
+  gap: 20px !important;
+  padding: 10px 0px !important;
+}

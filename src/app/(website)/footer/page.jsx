@@ -30,7 +30,6 @@ export default function Footer() {
         setData({
           brands: brandsRes,
         });
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }

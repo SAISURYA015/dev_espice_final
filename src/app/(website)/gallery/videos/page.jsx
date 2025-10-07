@@ -11,6 +11,7 @@ import pb from "../../_lib/pb";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSearchParams } from "next/navigation";
 
 const Gallery = () => {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,9 @@ const Gallery = () => {
 
   const [videoOpen, setVideoOpen] = useState("");
   const [videoFade, setVideoFade] = useState(false);
+
+  const searchParams = useSearchParams();
+  const videoId = searchParams.get("videoId");
 
   useEffect(() => setVideoFade(!!videoOpen), [videoOpen]);
 
@@ -117,6 +121,24 @@ const Gallery = () => {
 
     fetchData();
   }, []);
+
+  // Auto-scroll to the image if imageId is present
+  useEffect(() => {
+    if (!loading && videoId && data.videos.length > 0) {
+      const el = document.getElementById(videoId);
+      if (el) {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        // Optional: briefly highlight the image for visual cue
+        el.classList.add("ring-4", "ring-[#d13b2a]", "ring-offset-2");
+        // setTimeout(() => {
+        //   el.classList.remove("ring-4", "ring-[#d13b2a]", "ring-offset-2");
+        // }, 2000);
+      }
+    }
+  }, [loading, videoId, data.videos]);
 
   if (loading)
     return (
@@ -229,11 +251,11 @@ const Gallery = () => {
           </>
         ) : galactive == "vid" ? (
           <>
-            <div className="mt-4 max-w-7xl">
+            <div className="mt-6 max-w-7xl">
               {data.videos && data.videos.length > 0 ? (
                 <Slider {...sliderSettings}>
                   {data.videos.map((video) => (
-                    <div key={video.id} className="px-2">
+                    <div key={video.id} id={video.id}>
                       <video
                         className="w-full h-64 object-cover rounded-md hover:scale-105 hover:cursor-pointer"
                         crossOrigin="anonymous"

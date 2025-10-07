@@ -76,7 +76,10 @@ export default function NavBar() {
             {/* You could use next/image here if desired */}
           </Link>
 
-          <Link href="/investor-relation/livestock" className="text-[10px]">
+          <Link
+            href="/investor-relation/livestock#focus"
+            className="text-[10px]"
+          >
             <span className="font-bold border border-[#223a6c] text-[#223a6c] rounded py-0.5 px-3">
               Click here for stock price
             </span>

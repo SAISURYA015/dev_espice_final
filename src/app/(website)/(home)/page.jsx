@@ -9,6 +9,7 @@ import pb from "../_lib/pb";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -160,7 +161,7 @@ const Home = () => {
           ANNOUNCEMENTS
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 w-full mx-auto">
-          <a href="/investor-relation/financial-results">
+          <a href="/investor-relation/financial-results#focus">
             <div className="rounded-xl p-6 pb-2 text-white text-left shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer ease-in-out transform hover:scale-[1.02] bg-[#d13b2a]">
               <h3 className="text-[16px] font-semibold leading-snug mb-2">
                 Latest Stock Summary
@@ -176,7 +177,7 @@ const Home = () => {
             </div>
           </a>
 
-          <a href="/investor-relation/meetings">
+          <a href="/investor-relation/meetings#focus">
             <div className="rounded-xl p-6 pb-2 text-white text-left shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer ease-in-out transform hover:scale-[1.02] bg-[#d13b2a]/70">
               <h3 className="text-[16px] font-semibold leading-snug mb-2">
                 Business Expansion Report
@@ -192,7 +193,7 @@ const Home = () => {
             </div>
           </a>
 
-          <a href="/investor-relation/shareholder">
+          <a href="/investor-relation/shareholder#focus">
             <div className="rounded-xl p-6 pb-2 text-white text-left shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer ease-in-out transform hover:scale-[1.02] bg-[#152768]">
               <h3 className="text-[16px] font-semibold leading-snug mb-2">
                 PAN India Market Entry
@@ -208,7 +209,7 @@ const Home = () => {
             </div>
           </a>
 
-          <a href="/investor-relation/livestock">
+          <a href="/investor-relation/livestock#focus">
             <div className="rounded-xl p-6 pb-2 text-white text-left shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer ease-in-out transform hover:scale-[1.02] bg-[#152768]/80">
               <h3 className="text-[16px] font-semibold leading-snug mb-2">
                 Strategic Investor Brief
@@ -435,7 +436,10 @@ const Home = () => {
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {data.images && data.images.length > 0 ? (
                 data.images.map((image) => (
-                  <a href="/gallery/images" key={image.id}>
+                  <Link
+                    href={`/gallery/images?imageId=${image.id}`}
+                    key={image.id}
+                  >
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
                         className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
@@ -443,7 +447,7 @@ const Home = () => {
                         alt={image.name || "Brand"}
                       />
                     </div>
-                  </a>
+                  </Link>
                 ))
               ) : (
                 <p>Loading images...</p>
@@ -463,7 +467,10 @@ const Home = () => {
               {data.videos && data.videos.length > 0 ? (
                 <Slider {...sliderSettings}>
                   {data.videos.map((video) => (
-                    <a href="/gallery/videos" key={video.id}>
+                    <Link
+                      href={`/gallery/videos?videoId=${video.id}`}
+                      key={video.id}
+                    >
                       <div key={video.id} className="px-2">
                         <video
                           className="w-full h-64 object-cover rounded-md hover:scale-105 hover:cursor-pointer"
@@ -476,7 +483,7 @@ const Home = () => {
                           Your browser does not support the video tag.
                         </video>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </Slider>
               ) : (

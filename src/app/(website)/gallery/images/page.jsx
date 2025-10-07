@@ -11,6 +11,7 @@ import pb from "../../_lib/pb";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSearchParams } from "next/navigation";
 
 const Gallery = () => {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,9 @@ const Gallery = () => {
 
   const [videoOpen, setVideoOpen] = useState("");
   const [videoFade, setVideoFade] = useState(false);
+
+  const searchParams = useSearchParams();
+  const imageId = searchParams.get("imageId"); // 'dlkqdjvneoy9jla'
 
   useEffect(() => setVideoFade(!!videoOpen), [videoOpen]);
 
@@ -134,6 +138,24 @@ const Gallery = () => {
     fetchData();
   }, []);
 
+  // Auto-scroll to the image if imageId is present
+  useEffect(() => {
+    if (!loading && imageId && data.images.length > 0) {
+      const el = document.getElementById(imageId);
+      if (el) {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        // Optional: briefly highlight the image for visual cue
+        el.classList.add("ring-4", "ring-[#d13b2a]", "ring-offset-2");
+        // setTimeout(() => {
+        //   el.classList.remove("ring-4", "ring-[#d13b2a]", "ring-offset-2");
+        // }, 2000);
+      }
+    }
+  }, [loading, imageId, data.images]);
+
   if (loading)
     return (
       <>
@@ -215,16 +237,21 @@ const Gallery = () => {
 
         {galactive == "img" ? (
           <>
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {data.images && data.images.length > 0 ? (
                 data.images.map((image) => (
                   <div
                     key={image.id}
-                    className="flex items-center justify-center border border-gray-300 rounded-2xl"
+                    id={image.id}
+                    className={`flex items-center justify-center `}
                   >
                     <img
                       src={pb.files.getURL(image, image.image)}
-                      className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
+                      className={`object-cover w-full h-64 ${
+                        imageId == image.id
+                          ? ""
+                          : "hover:scale-105 hover:cursor-pointer"
+                      }`}
                       alt="preview"
                       onClick={(e) => {
                         e.stopPropagation();

@@ -51,7 +51,7 @@ const Policies = () => {
   const isActive = pathname === "/investor-relation/policies";
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {isActive && policiesInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">

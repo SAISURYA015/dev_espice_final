@@ -2,17 +2,17 @@
 import React, { useEffect, useState } from "react";
 
 import {
-  CalendarCheck, 
-  LineChart, 
-  IndianRupee, 
-  UserRound, 
-  Crown, 
-  UserCog, 
+  CalendarCheck,
+  LineChart,
+  IndianRupee,
+  UserRound,
+  Crown,
+  UserCog,
   CalendarDays,
-  ListChecks, 
-  FileStack, 
-  Tag, 
-  ChartNoAxesColumn, 
+  ListChecks,
+  FileStack,
+  Tag,
+  ChartNoAxesColumn,
 } from "lucide-react";
 
 import { usePathname } from "next/navigation";
@@ -86,8 +86,20 @@ const menuItems = [
 export default function Sidebar() {
   const pathname = usePathname();
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        const yOffset = -80; // 👈 your desired offset
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+  }, []);
+
   return (
-    <div className="bg-orange-50">
+    <div id="focus" className="bg-orange-50">
       <div className="w-full lg:w-96 bg-gray-100 text-gray-600 flex flex-col border-r-[1.5px] z-40">
         {/* <p className="text-2xl text-center font-bold px-3 py-3 border-b border-gray-200 text-[#223972]">
           Spice Lounge
@@ -100,7 +112,7 @@ export default function Sidebar() {
               return (
                 <li key={tab.title}>
                   <a
-                    href={tab.href}
+                    href={`${tab.href}#focus`}
                     className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-300 ${
                       pathname.includes(tab.href.toLowerCase())
                         ? "bg-[#223972]/10 border-l-4 border-[#223972] text-[#223972] font-semibold"
