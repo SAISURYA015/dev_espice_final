@@ -71,7 +71,9 @@ const Financial = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q1)}
                   >
-                    30.06.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q1)
+                      ? `30.06.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -80,7 +82,9 @@ const Financial = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q2)}
                   >
-                    30.09.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q2)
+                      ? `30.09.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -89,7 +93,9 @@ const Financial = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q3)}
                   >
-                    31.12.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q3)
+                      ? `31.12.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -98,7 +104,9 @@ const Financial = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q4)}
                   >
-                    31.03.{Number(report.title.split("-")[0]) + 1}
+                    {pb.files.getURL(report, report.q4)
+                      ? `31.03.${Number(report.title.split("-")[0]) + 1}`
+                      : "-"}
                   </a>
                 </td>
               </tr>

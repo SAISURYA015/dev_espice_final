@@ -91,6 +91,10 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/annual-report",
           },
           {
+            title: "Annual Returns",
+            href: "/dashboard/investor-relation/annual-returns",
+          },
+          {
             title: "Financial Report",
             href: "/dashboard/investor-relation/financial-report",
           },
@@ -103,8 +107,24 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/governance",
           },
           {
-            title: "Disclosure",
+            title: "Disclosure 46",
             href: "/dashboard/investor-relation/disclosure",
+          },
+          {
+            title: "Disclosure - FSC",
+            href: "/dashboard/disclosure-files/financials-subsidiary-companies",
+          },
+          {
+            title: "Disclosure - SCR",
+            href: "/dashboard/disclosure-files/secretarial-compliance-report",
+          },
+          {
+            title: "Disclosure - R30",
+            href: "/dashboard/disclosure-files/disclosure-r30",
+          },
+          {
+            title: "Disclosure - Paper Advt",
+            href: "/dashboard/disclosure-files/paper-adv",
           },
           { title: "Meetings", href: "/dashboard/investor-relation/meetings" },
           { title: "Policies", href: "/dashboard/investor-relation/policies" },
@@ -117,26 +137,38 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/open-offer",
           },
           {
+            title: "KYC Forms",
+            href: "/dashboard/investor-relation/kyc-forms",
+          },
+          {
+            title: "Scrutinizer Report",
+            href: "/dashboard/investor-relation/scrutinizer",
+          },
+          {
+            title: "Others",
+            href: "/dashboard/investor-relation/others",
+          },
+          {
             title: "Live Stock Info",
             href: "/dashboard/investor-relation/live-stock",
           },
         ],
         icon: "Handshake",
       },
-      {
-        title: "Disclosure-Files",
-        children: [
-          {
-            title: "financials-subsidiary-companies",
-            href: "/dashboard/disclosure-files/financials-subsidiary-companies",
-          },
-          {
-            title: "secretarial-compliance-report",
-            href: "/dashboard/disclosure-files/secretarial-compliance-report",
-          },
-        ],
-        icon: "Files",
-      },
+      // {
+      //   title: "Disclosure-Files",
+      //   children: [
+      //     {
+      //       title: "financials-subsidiary-companies",
+      //       href: "/dashboard/disclosure-files/financials-subsidiary-companies",
+      //     },
+      //     {
+      //       title: "secretarial-compliance-report",
+      //       href: "/dashboard/disclosure-files/secretarial-compliance-report",
+      //     },
+      //   ],
+      //   icon: "Files",
+      // },
       {
         title: "Contact",
         children: [
@@ -169,6 +201,10 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/annual-report",
           },
           {
+            title: "Annual Returns",
+            href: "/dashboard/investor-relation/annual-returns",
+          },
+          {
             title: "Financial Report",
             href: "/dashboard/investor-relation/financial-report",
           },
@@ -181,8 +217,24 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/governance",
           },
           {
-            title: "Disclosure",
+            title: "Disclosure 46",
             href: "/dashboard/investor-relation/disclosure",
+          },
+          {
+            title: "Disclosure - FSC",
+            href: "/dashboard/disclosure-files/financials-subsidiary-companies",
+          },
+          {
+            title: "Disclosure - SCR",
+            href: "/dashboard/disclosure-files/secretarial-compliance-report",
+          },
+          {
+            title: "Disclosure - R30",
+            href: "/dashboard/disclosure-files/disclosure-r30",
+          },
+          {
+            title: "Disclosure - Paper Advt",
+            href: "/dashboard/disclosure-files/paper-adv",
           },
           { title: "Meetings", href: "/dashboard/investor-relation/meetings" },
           { title: "Policies", href: "/dashboard/investor-relation/policies" },
@@ -195,26 +247,38 @@ export default function Sidebar() {
             href: "/dashboard/investor-relation/open-offer",
           },
           {
+            title: "KYC Forms",
+            href: "/dashboard/investor-relation/kyc-forms",
+          },
+          {
+            title: "Scrutinizer Report",
+            href: "/dashboard/investor-relation/scrutinizer",
+          },
+          {
+            title: "Others",
+            href: "/dashboard/investor-relation/others",
+          },
+          {
             title: "Live Stock Info",
             href: "/dashboard/investor-relation/live-stock",
           },
         ],
         icon: "Handshake",
       },
-      {
-        title: "Disclosure-Files",
-        children: [
-          {
-            title: "financials-subsidiary-companies",
-            href: "/dashboard/disclosure-files/financials-subsidiary-companies",
-          },
-          {
-            title: "secretarial-compliance-report",
-            href: "/dashboard/disclosure-files/secretarial-compliance-report",
-          },
-        ],
-        icon: "Files",
-      },
+      // {
+      //   title: "Disclosure-Files",
+      //   children: [
+      //     {
+      //       title: "financials-subsidiary-companies",
+      //       href: "/dashboard/disclosure-files/financials-subsidiary-companies",
+      //     },
+      //     {
+      //       title: "secretarial-compliance-report",
+      //       href: "/dashboard/disclosure-files/secretarial-compliance-report",
+      //     },
+      //   ],
+      //   icon: "Files",
+      // },
     ];
 
     const defaultMenu = [
@@ -320,7 +384,7 @@ export default function Sidebar() {
                   </button>
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      openMenus[item.title] ? "max-h-96" : "max-h-0"
+                      openMenus[item.title] ? "h-auto" : "h-0"
                     }`}
                   >
                     <ul className="ml-5 pl-1 mt-1 space-y-1 border-l-[1.5px] text-sm">

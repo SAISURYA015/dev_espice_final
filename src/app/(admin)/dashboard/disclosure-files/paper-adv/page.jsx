@@ -4,7 +4,7 @@ import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const StockExchange = () => {
+const PaperAdv = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
@@ -28,6 +28,7 @@ const StockExchange = () => {
       setLoading(false);
     }
   }, []);
+
   useEffect(() => {
     setFade(open);
   }, [open]);
@@ -35,7 +36,7 @@ const StockExchange = () => {
   // Fetch records
   const fetchData = async () => {
     const records = await pb
-      .collection("stock_exchange")
+      .collection("paper_adv")
       .getFullList({ sort: "sno" }, { requestKey: null });
     setData(records);
   };
@@ -82,9 +83,9 @@ const StockExchange = () => {
       }
 
       if (editingRow) {
-        await pb.collection("stock_exchange").update(editingRow.id, updateData);
+        await pb.collection("paper_adv").update(editingRow.id, updateData);
       } else {
-        await pb.collection("stock_exchange").create(updateData);
+        await pb.collection("paper_adv").create(updateData);
       }
 
       fetchData();
@@ -105,7 +106,7 @@ const StockExchange = () => {
     if (!confirmDelete) return;
 
     try {
-      await pb.collection("stock_exchange").delete(editingRow.id);
+      await pb.collection("paper_adv").delete(editingRow.id);
       setData((prev) => prev.filter((item) => item.id !== editingRow.id));
       setOpen(false);
       setEditingRow(null);
@@ -116,6 +117,7 @@ const StockExchange = () => {
   };
 
   const fmt = (val) => (val ? new Date(val).toLocaleString() : "-");
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -126,13 +128,13 @@ const StockExchange = () => {
           <span className="text-gray-600 hover:text-black">Dashboard</span>
         </a>
         <span className="text-gray-600">/</span>
-        <span className="text-black">Stock Exchange</span>
+        <span className="text-black">Paper Advertisements</span>
       </div>
 
       {/* Table */}
       <div className="p-4 mt-14 w-full">
         <div className="flex justify-between items-center mb-3">
-          <h2 className="font-semibold text-lg">Stock Exchange</h2>
+          <h2 className="font-semibold text-lg">Paper Advertisements</h2>
           <button
             onClick={openAdd}
             className="px-3 py-1 bg-gray-700 text-white hover:bg-gray-800 rounded"
@@ -219,7 +221,7 @@ const StockExchange = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold mb-4">
-                {editingRow ? "Edit" : "Add"} Stock Exchange
+                {editingRow ? "Edit" : "Add"} Paper Advertisements
               </h3>
 
               {/* Form Fields */}
@@ -346,4 +348,4 @@ const StockExchange = () => {
   );
 };
 
-export default StockExchange;
+export default PaperAdv;

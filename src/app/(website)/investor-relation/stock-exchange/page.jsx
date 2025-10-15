@@ -3,24 +3,24 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import pb from "../../_lib/pb";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const StockExchange = () => {
   const [loading, setLoading] = useState(true);
-  const [stockExchangeInfo, setStockExchangeInfo] = useState([]);
+  const [meetingsInfo, setMeetingsInfo] = useState([]);
+  const [openIndex, setOpenIndex] = useState(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const stockExchangeInfoRes = await pb
-          .collection("meetings_policies_stock_exchange_open_offer")
+        const meetingsInfoRes = await pb
+          .collection("stock_exchange")
           .getFullList(200, {
             sort: "sno",
-            filter: 'page = "stock"',
             requestKey: null,
           });
-
-        setStockExchangeInfo(stockExchangeInfoRes);
+        setMeetingsInfo(meetingsInfoRes);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -33,50 +33,109 @@ const StockExchange = () => {
 
   if (loading)
     return (
-      <div className="h-dvh flex justify-center items-center bg-orange-50">
-        <div className="relative w-32 h-32 flex justify-center items-center">
-          {/* Spinning border */}
-          <div className="absolute w-full h-full border-4 border-gray-300 border-t-[#152768] rounded-full animate-spin"></div>
-
-          {/* Logo inside */}
-          <img
-            src="/images/logo.png"
-            alt="Spice Lounge Logo"
-            className="w-20 h-20 object-contain"
-          />
-        </div>
+      <div className="h-screen w-full flex justify-center items-center bg-orange-50">
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-4 border-t-blue-700 rounded-full animate-spin"></div>
       </div>
     );
 
-  // ✅ Use correct pathname for Stock Exchange page
   const isActive = pathname === "/investor-relation/stock-exchange";
 
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const formatFileName = (file, sno) => {
+    // remove leading serial number if it's in filename itself
+    let name = file.replace(/^\d+_/, "");
+
+    // remove hash like _4zou3xyxej.2024.pdf → keep only .2024.pdf
+    name = name.replace(/_[a-z0-9]{6,}\.(\d{4})\.pdf$/i, ".$1.pdf");
+
+    // remove .pdf
+    name = name.replace(/\.pdf$/i, "");
+
+    // replace underscores with spaces
+    name = name.replace(/_/g, " ");
+
+    // Title Case
+    name = name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+
+    // convert "dated 3 5 2024" → "dated 3.5.2024"
+    name = name.replace(/dated (\d+)\s+(\d+)\s+(\d{4})/i, "dated $1.$2.$3");
+
+    // prepend sno if available
+    if (sno) {
+      name = `${sno}. ${name}`;
+    }
+
+    return name.trim();
+  };
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {isActive && stockExchangeInfo.length > 0 && (
+    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {isActive && meetingsInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">
             <h2 className="text-md lg:text-2xl font-bold text-[#223972] border-b-2 border-gray-300 pb-2 inline-block">
-              Stock Exchange Filings
+              Stock Exchange Files
             </h2>
           </header>
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
-            {stockExchangeInfo.map((info) => {
-              const fileUrl = pb.files.getURL(info, info.file);
-              return (
-                <div key={info.id} className="text-red-600 font-medium">
-                  {info.title} –{" "}
-                  <a
-                    href={fileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-red-800"
-                  >
-                    Click Here
-                  </a>
-                </div>
-              );
-            })}
+
+          <div className="space-y-4">
+            {meetingsInfo.map((info, index) => (
+              <div
+                key={info.id}
+                className="border rounded-lg shadow-sm overflow-hidden"
+              >
+                {/* Accordion Header */}
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-lg bg-white hover:bg-gray-50"
+                >
+                  <span>{info.title}</span>
+                  {openIndex === index ? (
+                    <ChevronUp className="text-gray-600" />
+                  ) : (
+                    <ChevronDown className="text-gray-600" />
+                  )}
+                </button>
+
+                {/* Accordion Content */}
+                {openIndex === index && (
+                  <div className="bg-gray-50 px-4 py-3 space-y-2">
+                    {Array.isArray(info.files) && info.files.length > 0 ? (
+                      info.files.map((file, idx) => {
+                        const fileUrl = pb.files.getURL(info, file);
+                        const displayName = formatFileName(file);
+
+                        return (
+                          <div
+                            key={idx}
+                            className="flex justify-between items-center bg-white p-2 rounded-md border"
+                          >
+                            <p className="text-gray-800 text-sm sm:text-base">
+                              {displayName}
+                            </p>
+                            <a
+                              href={fileUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-red-600 font-medium hover:text-red-800"
+                            >
+                              Download
+                            </a>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p className="text-gray-500 text-sm">
+                        No files available
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </>
       )}

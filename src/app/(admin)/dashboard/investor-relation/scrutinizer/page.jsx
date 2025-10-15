@@ -4,7 +4,7 @@ import pb from "@/app/(admin)/_lib/pb";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const StockExchange = () => {
+const Scrutinizer = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
@@ -14,9 +14,9 @@ const StockExchange = () => {
   const [form, setForm] = useState({
     sno: "",
     title: "",
+    page: "scrutinizer",
   });
-  const [existingFiles, setExistingFiles] = useState([]);
-  const [newFiles, setNewFiles] = useState([]);
+  const [newFile, setNewFile] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -32,11 +32,17 @@ const StockExchange = () => {
     setFade(open);
   }, [open]);
 
-  // Fetch records
+  // Fetch records (only policies)
   const fetchData = async () => {
     const records = await pb
-      .collection("stock_exchange")
-      .getFullList({ sort: "sno" }, { requestKey: null });
+      .collection("meetings_policies_stock_exchange_open_offer")
+      .getFullList(
+        {
+          sort: "sno",
+          filter: 'page = "scrutinizer"',
+        },
+        { requestKey: null }
+      );
     setData(records);
   };
 
@@ -49,9 +55,9 @@ const StockExchange = () => {
     setForm({
       sno: row.sno || "",
       title: row.title || "",
+      page: "scrutinizer",
     });
-    setExistingFiles(row.files || []);
-    setNewFiles([]);
+    setNewFile(null);
     setOpen(true);
   };
 
@@ -60,10 +66,15 @@ const StockExchange = () => {
     setForm({
       sno: "",
       title: "",
+      page: "scrutinizer",
     });
-    setExistingFiles([]);
-    setNewFiles([]);
+    setNewFile(null);
     setOpen(true);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) setNewFile(file);
   };
 
   const handleSave = async () => {
@@ -71,28 +82,27 @@ const StockExchange = () => {
       const updateData = {
         sno: form.sno,
         title: form.title,
+        page: "scrutinizer",
       };
-
-      // keep existing files + add new ones
-      if (existingFiles.length > 0) {
-        updateData.files = existingFiles;
-      }
-      if (newFiles.length > 0) {
-        updateData.files = [...(updateData.files || []), ...newFiles];
+      if (newFile) {
+        updateData.file = newFile;
       }
 
       if (editingRow) {
-        await pb.collection("stock_exchange").update(editingRow.id, updateData);
+        await pb
+          .collection("meetings_policies_stock_exchange_open_offer")
+          .update(editingRow.id, updateData);
       } else {
-        await pb.collection("stock_exchange").create(updateData);
+        await pb
+          .collection("meetings_policies_stock_exchange_open_offer")
+          .create(updateData);
       }
 
       fetchData();
       setOpen(false);
       setEditingRow(null);
-      setForm({ sno: "", title: "" });
-      setExistingFiles([]);
-      setNewFiles([]);
+      setForm({ sno: "", title: "", page: "scrutinizer" });
+      setNewFile(null);
     } catch (err) {
       console.error(err);
       alert("Error saving: " + err.message);
@@ -105,7 +115,9 @@ const StockExchange = () => {
     if (!confirmDelete) return;
 
     try {
-      await pb.collection("stock_exchange").delete(editingRow.id);
+      await pb
+        .collection("meetings_policies_stock_exchange_open_offer")
+        .delete(editingRow.id);
       setData((prev) => prev.filter((item) => item.id !== editingRow.id));
       setOpen(false);
       setEditingRow(null);
@@ -126,13 +138,13 @@ const StockExchange = () => {
           <span className="text-gray-600 hover:text-black">Dashboard</span>
         </a>
         <span className="text-gray-600">/</span>
-        <span className="text-black">Stock Exchange</span>
+        <span className="text-black">Scrutinizer</span>
       </div>
 
       {/* Table */}
       <div className="p-4 mt-14 w-full">
         <div className="flex justify-between items-center mb-3">
-          <h2 className="font-semibold text-lg">Stock Exchange</h2>
+          <h2 className="font-semibold text-lg">Scrutinizer</h2>
           <button
             onClick={openAdd}
             className="px-3 py-1 bg-gray-700 text-white hover:bg-gray-800 rounded"
@@ -148,7 +160,8 @@ const StockExchange = () => {
                 <tr>
                   <th className="px-3 py-2">S.No</th>
                   <th className="px-3 py-2">Title</th>
-                  <th className="px-3 py-2">Files</th>
+                  <th className="px-3 py-2">File</th>
+                  <th className="px-3 py-2">Page</th>
                   <th className="px-3 py-2">Created</th>
                   <th className="px-3 py-2">Updated</th>
                 </tr>
@@ -156,7 +169,7 @@ const StockExchange = () => {
               <tbody className="text-center">
                 {data.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="p-4 text-gray-600">
+                    <td colSpan={6} className="p-4 text-gray-600">
                       No Records
                     </td>
                   </tr>
@@ -170,24 +183,20 @@ const StockExchange = () => {
                       <td className="px-3 py-2">{item.sno}</td>
                       <td className="px-3 py-2 font-medium">{item.title}</td>
                       <td className="px-3 py-2">
-                        {item.files && item.files.length > 0 ? (
-                          <div className="flex flex-col gap-1 items-center">
-                            {item.files.map((file, idx) => (
-                              <a
-                                key={idx}
-                                href={pb.files.getURL(item, file)}
-                                target="_blank"
-                                className="text-blue-600 underline"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                File {idx + 1}
-                              </a>
-                            ))}
-                          </div>
+                        {item.file ? (
+                          <a
+                            href={pb.files.getURL(item, item.file)}
+                            target="_blank"
+                            className="text-blue-600 underline"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            View PDF
+                          </a>
                         ) : (
                           "N/A"
                         )}
                       </td>
+                      <td className="px-3 py-2">{item.page}</td>
                       <td className="px-3 py-2 text-gray-500">
                         {fmt(item.created)}
                       </td>
@@ -219,7 +228,7 @@ const StockExchange = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold mb-4">
-                {editingRow ? "Edit" : "Add"} Stock Exchange
+                {editingRow ? "Edit" : "Add"} Scrutinizer Report
               </h3>
 
               {/* Form Fields */}
@@ -239,81 +248,43 @@ const StockExchange = () => {
                 className="w-full border px-3 py-2 rounded mb-4"
               />
 
-              {/* Files */}
               <label className="block mb-2 text-sm font-medium">
-                Files (PDFs)
+                File (PDF)
               </label>
-              <div className="space-y-2">
-                {/* Existing files */}
-                {existingFiles.map((file, idx) => (
-                  <div
-                    key={idx}
-                    className="flex justify-between items-center border px-3 py-2 rounded bg-white"
-                  >
+              <div className="border p-3 rounded bg-white">
+                {editingRow && editingRow.file && !newFile && (
+                  <div className="mb-2">
                     <a
-                      href={
-                        editingRow ? pb.files.getURL(editingRow, file) : "#"
-                      }
+                      href={pb.files.getURL(editingRow, editingRow.file)}
                       target="_blank"
-                      className="text-blue-600 underline truncate"
+                      className="text-blue-600 underline"
                     >
-                      {file}
+                      View Current PDF
                     </a>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setExistingFiles(
-                          existingFiles.filter((_, i) => i !== idx)
-                        )
-                      }
-                      className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-                    >
-                      <X />
-                    </button>
                   </div>
-                ))}
+                )}
 
-                {/* New files */}
-                {newFiles.map((file, idx) => (
-                  <div
-                    key={idx}
-                    className="flex justify-between items-center border px-3 py-2 rounded bg-gray-50"
-                  >
-                    <span className="truncate">{file.name}</span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setNewFiles(newFiles.filter((_, i) => i !== idx))
-                      }
-                      className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-                    >
-                      <X />
-                    </button>
+                {newFile && (
+                  <div className="text-xs text-gray-500 mb-2">
+                    Selected: {newFile.name}
                   </div>
-                ))}
+                )}
 
-                {/* Add new files */}
-                <div>
-                  <input
-                    type="file"
-                    accept="application/pdf"
-                    multiple
-                    onChange={(e) => {
-                      const files = Array.from(e.target.files || []);
-                      setNewFiles([...newFiles, ...files]);
-                    }}
-                    className="hidden"
-                    id="fileInput"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => document.getElementById("fileInput").click()}
-                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-800 mt-2"
-                  >
-                    + Add File
-                  </button>
-                </div>
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleFileChange}
+                  className="w-full border px-2 py-1 rounded"
+                />
               </div>
+
+              <label className="block mt-4 text-sm font-medium">Page</label>
+              <input
+                type="text"
+                value="scrutinizer"
+                readOnly
+                className="w-full border px-3 py-2 rounded bg-gray-100"
+              />
 
               <div className="flex justify-end gap-2 mt-4">
                 {editingRow && (
@@ -346,4 +317,4 @@ const StockExchange = () => {
   );
 };
 
-export default StockExchange;
+export default Scrutinizer;

@@ -59,23 +59,31 @@ const Policies = () => {
               Policies
             </h2>
           </header>
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
-            {policiesInfo.map((info) => {
-              const fileUrl = pb.files.getURL(info, info.file);
-              return (
-                <div key={info.id} className="text-red-600 font-medium">
-                  {info.title} –{" "}
-                  <a
-                    href={fileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-red-800"
-                  >
-                    Click Here
-                  </a>
-                </div>
-              );
-            })}
+          <div className="overflow-x-auto">
+            <table className="min-w-full border border-gray-300 rounded-lg">
+              <tbody>
+                {policiesInfo.map((info) => {
+                  const fileUrl = pb.files.getURL(info, info.file);
+                  return (
+                    <tr key={info.id} className="hover:bg-gray-50">
+                      <td className="py-2 px-3 border font-semibold text-[#223972] w-1/2">
+                        {info.title}
+                      </td>
+                      <td className="py-2 px-3 border text-center w-1/2">
+                        <a
+                          href={fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline text-red-600 hover:text-red-800"
+                        >
+                          Click Here
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </>
       )}

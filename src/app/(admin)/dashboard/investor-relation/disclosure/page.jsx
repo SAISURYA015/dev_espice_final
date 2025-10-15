@@ -248,13 +248,13 @@ const Disclosures = () => {
           Dashboard
         </a>
         <span className="text-gray-600">/</span>
-        <span className="text-black">Disclosures</span>
+        <span className="text-black">Disclosures 46</span>
       </div>
 
       {/* Table */}
       <div className="p-4 mt-14 w-full">
         <div className="flex justify-between items-center mb-3">
-          <h2 className="font-semibold text-lg">Disclosures</h2>
+          <h2 className="font-semibold text-lg">Disclosures 46</h2>
           <button
             onClick={openAdd}
             className="px-3 py-1 bg-gray-700 text-white hover:bg-gray-800 rounded"

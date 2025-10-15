@@ -70,7 +70,7 @@ const CorporateGov = () => {
         {/* Concluding Statement */}
         <p className="text-gray-800">{data[0] && data[0].description2}</p>
       </div>
-      <ShareHolding />
+      <ShareHolding title={"Corporate Governance"} alignTitle="text-left" />
     </div>
   );
 };

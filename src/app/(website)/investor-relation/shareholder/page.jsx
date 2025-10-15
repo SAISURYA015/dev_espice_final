@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import pb from "../../_lib/pb";
 
-const ShareHolding = () => {
+const ShareHolding = ({ title, alignTitle = "text-center" }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,8 +44,10 @@ const ShareHolding = () => {
   return (
     <div className="bg-orange-50">
       <div className="px-4 bg-orange-50">
-        <h2 className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
-          Shareholding Pattern
+        <h2
+          className={`text-md lg:text-2xl text-[#223972] mt-3 font-semibold ${alignTitle} `}
+        >
+          {title ? title : "Shareholding Pattern"}
         </h2>
       </div>
       <div className="overflow-x-auto p-4">
@@ -71,7 +73,9 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q1)}
                   >
-                    30.06.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q1)
+                      ? `30.06.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -80,7 +84,9 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q2)}
                   >
-                    30.09.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q2)
+                      ? `30.09.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -89,7 +95,9 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q3)}
                   >
-                    31.12.{report.title.split("-")[0]}
+                    {pb.files.getURL(report, report.q3)
+                      ? `31.12.${report.title.split("-")[0]}`
+                      : "-"}
                   </a>
                 </td>
                 <td className="px-4 py-2 text-center border-2">
@@ -98,7 +106,9 @@ const ShareHolding = () => {
                     className="text-red-500"
                     href={pb.files.getURL(report, report.q4)}
                   >
-                    31.03.{Number(report.title.split("-")[0]) + 1}
+                    {pb.files.getURL(report, report.q4)
+                      ? `31.03.${Number(report.title.split("-")[0]) + 1}`
+                      : "-"}
                   </a>
                 </td>
               </tr>

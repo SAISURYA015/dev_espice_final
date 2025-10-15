@@ -13,6 +13,9 @@ import {
   FileStack,
   Tag,
   ChartNoAxesColumn,
+  ClipboardCheck,
+  FileText,
+  FolderOpen,
 } from "lucide-react";
 
 import { usePathname } from "next/navigation";
@@ -26,6 +29,11 @@ const menuItems = [
   {
     title: "Annual Reports",
     href: "/investor-relation/annual-reports",
+    icon: LineChart,
+  },
+  {
+    title: "Annual Returns",
+    href: "/investor-relation/annual-returns",
     icon: LineChart,
   },
 
@@ -74,6 +82,21 @@ const menuItems = [
     title: "Open Offer 2024",
     href: "/investor-relation/openoffer",
     icon: Tag,
+  },
+  {
+    title: "KYC Forms",
+    href: "/investor-relation/kyc-forms",
+    icon: FileText,
+  },
+  {
+    title: "Scrutinizer Report",
+    href: "/investor-relation/scrutinizer",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Others",
+    href: "/investor-relation/others",
+    icon: FolderOpen,
   },
   // live stock - pending
   {
