@@ -44,9 +44,11 @@ const Financial = () => {
   return (
     <div>
       <div className="px-4">
-        <h2 className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
-          Financial Results
-        </h2>
+        <div className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
+          <span className="border-b-2 border-gray-300 pb-1">
+            Financial Results
+          </span>
+        </div>
       </div>
       <div className="overflow-x-auto p-4">
         <table className="min-w-full table-fixed border-collapse">

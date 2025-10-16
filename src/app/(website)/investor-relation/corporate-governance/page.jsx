@@ -46,9 +46,11 @@ const CorporateGov = () => {
   return (
     <div>
       <div className="px-4 bg-orange-50">
-        <h2 className="text-lg lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
-          Corporate Governance
-        </h2>
+        <div className="text-lg lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
+          <span className="border-b-2 border-gray-300 pb-1">
+            Corporate Governance
+          </span>
+        </div>
       </div>
       <div className="overflow-x-auto p-4">
         {/* Introduction Paragraph */}

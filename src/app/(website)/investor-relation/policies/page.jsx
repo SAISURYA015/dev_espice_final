@@ -66,10 +66,10 @@ const Policies = () => {
                   const fileUrl = pb.files.getURL(info, info.file);
                   return (
                     <tr key={info.id} className="hover:bg-gray-50">
-                      <td className="py-2 px-3 border font-semibold text-[#223972] w-1/2">
+                      <td className="py-2 px-3 border font-semibold text-[#223972]">
                         {info.title}
                       </td>
-                      <td className="py-2 px-3 border text-center w-1/2">
+                      <td className="py-2 px-3 border text-center ">
                         <a
                           href={fileUrl}
                           target="_blank"

@@ -55,9 +55,9 @@ const KycForms = () => {
       {isActive && policiesInfo.length > 0 && (
         <>
           <header className="mb-8 text-center">
-            <h2 className="text-md lg:text-2xl font-bold text-[#223972] border-b-2 border-gray-300 pb-2 inline-block">
+            <div className="text-md lg:text-2xl font-bold text-[#223972] border-b-2 border-gray-300 pb-2 inline-block">
               KYC FORMS
-            </h2>
+            </div>
           </header>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-300 rounded-lg">

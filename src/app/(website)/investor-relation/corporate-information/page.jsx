@@ -57,7 +57,9 @@ const Corporate = () => {
   return (
     <div>
       <div className="text-2xl text-[#223972] mt-3 font-semibold text-center">
-        Corporate Information
+        <span className="border-b-2 border-gray-300 pb-1">
+          Corporate Information
+        </span>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-8">
         {data.address.length > 0 ? (

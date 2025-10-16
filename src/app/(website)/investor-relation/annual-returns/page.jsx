@@ -46,7 +46,7 @@ const Annual = () => {
     <div className="flex flex-col items-center px-4">
       {/* Title */}
       <div className="text-md lg:text-2xl text-[#223972] mt-3 font-semibold text-center">
-        Annual Returns
+        <span className="border-b-2 border-gray-300 pb-1">Annual Returns</span>
       </div>
 
       {/* Reports Grid */}

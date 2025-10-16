@@ -41,16 +41,20 @@ const Disclosures = () => {
 
   return (
     <div className="lg:p-4">
-      <h2 className="text-md lg:text-2xl font-semibold text-center text-[#223972] mb-4">
-        Disclosures under Regulation 46
-      </h2>
+      <div className="text-md lg:text-2xl font-semibold text-center text-[#223972] mb-4">
+        <span className="border-b-2 border-gray-300 pb-1">
+          Disclosures under Regulation 46
+        </span>
+      </div>
 
       <div className="text-sm md:text-md">
         <table className="min-w-full border border-gray-300 table-auto">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
               <th className="px-4 py-2 border">S.No</th>
-              <th className="px-4 py-2 border">Disclosure</th>
+              <th className="px-4 py-2 border text-lg">
+                Disclosures under Regulation 46
+              </th>
               <th className="px-8 py-2 border">Action</th>
             </tr>
           </thead>
