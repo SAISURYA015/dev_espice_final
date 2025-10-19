@@ -41,11 +41,11 @@ const Disclosures = () => {
 
   return (
     <div className="lg:p-4">
-      <div className="text-md lg:text-2xl font-semibold text-center text-[#223972] mb-4">
+      {/* <div className="text-md lg:text-2xl font-semibold text-center text-[#223972] mb-4">
         <span className="border-b-2 border-gray-300 pb-1">
           Disclosures under Regulation 46
         </span>
-      </div>
+      </div> */}
 
       <div className="text-sm md:text-md">
         <table className="min-w-full border border-gray-300 table-auto">
