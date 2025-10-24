@@ -435,7 +435,7 @@ const Home = () => {
           <div className="flex gap-4">
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {data.images && data.images.length > 0 ? (
-                data.images.map((image) => (
+                data.images.slice(0, 8).map((image) => (
                   <div key={image.id}>
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
