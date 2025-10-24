@@ -432,14 +432,11 @@ const Home = () => {
         </div>
 
         {galactive == "img" ? (
-          <>
+          <div className="flex gap-4">
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {data.images && data.images.length > 0 ? (
                 data.images.map((image) => (
-                  <Link
-                    href={`/gallery/images?imageId=${image.id}`}
-                    key={image.id}
-                  >
+                  <div key={image.id}>
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
                         className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
@@ -447,20 +444,20 @@ const Home = () => {
                         alt={image.name || "Brand"}
                       />
                     </div>
-                  </Link>
+                  </div>
                 ))
               ) : (
                 <p>Loading images...</p>
               )}
             </div>
-            <div className="flex justify-end">
+            <div className="flex items-center">
               <a href="/gallery/images">
                 <div className="bg-[#152768] text-white mt-2 p-2 rounded-full">
                   <ArrowRight />
                 </div>
               </a>
             </div>
-          </>
+          </div>
         ) : galactive == "vid" ? (
           <>
             <div className="max-w-7xl mt-4">

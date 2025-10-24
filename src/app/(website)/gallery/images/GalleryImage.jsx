@@ -12,16 +12,17 @@ const Slider = dynamic(() => import("react-slick"), { ssr: false });
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const GalleryImage = ({imageId}) => {
+const GalleryImage = ({ imageId }) => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const imagesPerPage = 8; // adjust as needed
 
   const [imgFade, setImgFade] = useState(false);
   const [imgOpen, setImgOpen] = useState("");
 
   const [videoOpen, setVideoOpen] = useState("");
   const [videoFade, setVideoFade] = useState(false);
-
 
   useEffect(() => setVideoFade(!!videoOpen), [videoOpen]);
 
@@ -153,6 +154,19 @@ const GalleryImage = ({imageId}) => {
     }
   }, [loading, imageId, data.images]);
 
+  const totalPages = Math.ceil(data.images.length / imagesPerPage);
+  const startIndex = (currentPage - 1) * imagesPerPage;
+  const endIndex = startIndex + imagesPerPage;
+  const currentImages = data.images.slice(startIndex, endIndex);
+
+  const handleGalleryNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handleGalleryPrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
   if (loading)
     return (
       <>
@@ -233,40 +247,68 @@ const GalleryImage = ({imageId}) => {
         </div>
 
         {galactive == "img" ? (
-          <>
+          <div className="flex">
+            {/* Prev Button */}
+            <button
+              onClick={handleGalleryPrev}
+              className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
+            >
+              <ChevronLeft size={64} />
+            </button>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {data.images && data.images.length > 0 ? (
-                data.images.map((image) => (
-                  <div
-                    key={image.id}
-                    id={image.id}
-                    className={`flex items-center justify-center `}
-                  >
-                    <img
-                      src={pb.files.getURL(image, image.image)}
-                      className={`object-cover w-full h-64 ${
-                        imageId == image.id
-                          ? ""
-                          : "hover:scale-105 hover:cursor-pointer"
-                      }`}
-                      alt="preview"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCurrentIndex(
-                          data.images.findIndex((img) => img.id === image.id)
-                        );
-                        setImgOpen(
-                          `${pb.files.getURL(image, image.image)}?thumb=1024x0`
-                        );
-                      }}
-                    />
-                  </div>
-                ))
-              ) : (
+              {!data?.images || data.images.length === 0 ? (
                 <p>Loading images...</p>
+              ) : (
+                <>
+                  {currentImages.map((image) => (
+                    <div
+                      key={image.id}
+                      id={image.id}
+                      className="flex items-center justify-center"
+                    >
+                      <img
+                        src={pb.files.getURL(image, image.image)}
+                        className={`object-cover w-64 h-64 ${
+                          imageId === image.id
+                            ? ""
+                            : "hover:scale-105 hover:cursor-pointer"
+                        }`}
+                        alt="preview"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentIndex(
+                            data.images.findIndex((img) => img.id === image.id)
+                          );
+                          setImgOpen(
+                            `${pb.files.getURL(
+                              image,
+                              image.image
+                            )}?thumb=1024x0`
+                          );
+                        }}
+                      />
+                    </div>
+                  ))}
+
+                  {/* Fill empty slots if fewer than 8 images */}
+                  {Array.from({ length: 8 - currentImages.length }).map(
+                    (_, i) => (
+                      <div key={i} className="flex items-center justify-center">
+                        <div className={`object-cover w-64 h-64`}></div>
+                      </div>
+                    )
+                  )}
+                </>
               )}
             </div>
-          </>
+            {/* Next Button */}
+            <button
+              onClick={handleGalleryNext}
+              className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
+            >
+              <ChevronRight size={64} />
+            </button>
+          </div>
         ) : galactive == "vid" ? (
           <>
             <div className="mt-4 max-w-7xl">
