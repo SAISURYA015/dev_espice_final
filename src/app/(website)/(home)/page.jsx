@@ -470,7 +470,7 @@ const Home = () => {
                     >
                       <div key={video.id} className="px-2">
                         <video
-                          className="w-full h-64 object-cover rounded-md hover:scale-105 hover:cursor-pointer"
+                          className="w-full h-64 object-cover rounded-md hover:scale-105"
                           crossOrigin="anonymous"
                         >
                           <source
