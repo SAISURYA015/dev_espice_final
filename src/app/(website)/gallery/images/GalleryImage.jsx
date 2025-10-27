@@ -251,11 +251,12 @@ const GalleryImage = ({ imageId }) => {
             {/* Prev Button */}
             <button
               onClick={handleGalleryPrev}
-              className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
             >
-              <ChevronLeft size={64} />
+              <ChevronLeft size={64} className={`text-black rounded-r-lg ${
+                currentPage < 2 ? "opacity-50" : "cursor-pointer"
+              }`} />
             </button>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {!data?.images || data.images.length === 0 ? (
                 <p>Loading images...</p>
               ) : (
@@ -271,7 +272,7 @@ const GalleryImage = ({ imageId }) => {
                         className={`object-cover w-64 h-64 ${
                           imageId === image.id
                             ? ""
-                            : "hover:scale-105 hover:cursor-pointer"
+                            : "hover:scale-102"
                         }`}
                         alt="preview"
                         onClick={(e) => {
@@ -304,9 +305,10 @@ const GalleryImage = ({ imageId }) => {
             {/* Next Button */}
             <button
               onClick={handleGalleryNext}
-              className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
             >
-              <ChevronRight size={64} />
+              <ChevronRight size={64} className={`text-black rounded-r-lg ${
+                currentPage >= totalPages ? "opacity-50" : "cursor-pointer"
+              }`} />
             </button>
           </div>
         ) : galactive == "vid" ? (

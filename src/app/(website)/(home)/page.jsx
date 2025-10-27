@@ -439,7 +439,7 @@ const Home = () => {
                   <div key={image.id}>
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
-                        className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
+                        className="object-cover w-full h-64 hover:scale-105"
                         src={pb.files.getURL(image, image.image)}
                         alt={image.name || "Brand"}
                       />
