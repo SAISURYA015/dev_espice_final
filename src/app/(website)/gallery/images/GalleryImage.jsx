@@ -251,9 +251,14 @@ const GalleryImage = ({ imageId }) => {
             {/* Prev Button */}
             <button
               onClick={handleGalleryPrev}
-              className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
+              className="text-black py-2 rounded-r-lg cursor-pointer"
             >
-              <ChevronLeft size={64} />
+              <ChevronLeft
+                size={64}
+                className={`text-black rounded-lg ${
+                  currentPage < 2 ? "opacity-50" : "cursor-pointer"
+                }`}
+              />
             </button>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {!data?.images || data.images.length === 0 ? (
@@ -306,7 +311,12 @@ const GalleryImage = ({ imageId }) => {
               onClick={handleGalleryNext}
               className="text-black px-3 py-2 rounded-r-lg cursor-pointer"
             >
-              <ChevronRight size={64} />
+              <ChevronRight
+                size={64}
+                className={`text-black rounded-lg ${
+                  currentPage >= totalPages ? "opacity-50" : "cursor-pointer"
+                }`}
+              />
             </button>
           </div>
         ) : galactive == "vid" ? (
@@ -354,43 +364,81 @@ const GalleryImage = ({ imageId }) => {
                     {brand.name}
                   </h2>
                   <div className="flex space-x-4 text-2xl text-gray-600">
-                    <a
-                      href={brand.facebook ? brand.facebook : "#"}
-                      target="_blank"
-                    >
+                    {brand.facebook ? (
+                      <a
+                        href={brand.facebook ? brand.facebook : "#"}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/facebook.png"
+                          alt="Facebook"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/facebook.png"
                         alt="Facebook"
                       />
-                    </a>
-                    <a
-                      href={brand.instagram ? brand.instagram : "#"}
-                      target="_blank"
-                    >
+                    )}
+
+                    {brand.instagram ? (
+                      <a
+                        href={brand.instagram ? brand.instagram : "#"}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/instagram.png"
+                          alt="Instagram"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/instagram.png"
                         alt="Instagram"
                       />
-                    </a>
-                    <a href={brand.google ? brand.google : "#"} target="_blank">
+                    )}
+
+                    {brand.google ? (
+                      <a
+                        href={brand.google ? brand.google : "#"}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/google-logo.png"
+                          alt="Google"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/google-logo.png"
                         alt="Google"
                       />
-                    </a>
-                    <a
-                      href={brand.youtube ? brand.youtube : "#"}
-                      target="_blank"
-                    >
+                    )}
+
+                    {brand.youtube ? (
+                      <a
+                        href={brand.youtube ? brand.youtube : "#"}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/youtube.png"
+                          alt="Google"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/youtube.png"
                         alt="Google"
                       />
-                    </a>
+                    )}
                   </div>
                 </div>
               ))}
@@ -421,7 +469,7 @@ const GalleryImage = ({ imageId }) => {
                       <div className="flex space-x-4 text-2xl text-gray-600">
                         {brand.own_delivery_icon ? (
                           <a
-                            href={brand.own_delivery ? brand.own_delivery : "#"}
+                            href={brand.own_delivery ? brand.own_delivery : ""}
                           >
                             <img
                               className="h-8 w-8 rounded object-cover"
@@ -435,36 +483,63 @@ const GalleryImage = ({ imageId }) => {
                         ) : (
                           <></>
                         )}
-                        <a
-                          href={brand.swiggy ? brand.swiggy : "#"}
-                          target="_blank"
-                        >
+
+                        {brand.swiggy ? (
+                          <a
+                            href={brand.swiggy ? brand.swiggy : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/swiggy.jpg"
+                              alt="swiggy"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/swiggy.jpg"
                             alt="swiggy"
                           />
-                        </a>
-                        <a
-                          href={brand.zomato ? brand.zomato : "#"}
-                          target="_blank"
-                        >
+                        )}
+
+                        {brand.zomato ? (
+                          <a
+                            href={brand.zomato ? brand.zomato : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/zomato.jpg"
+                              alt="zomato"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/zomato.jpg"
                             alt="zomato"
                           />
-                        </a>
-                        <a
-                          href={brand.dunzo ? brand.dunzo : "#"}
-                          target="_blank"
-                        >
+                        )}
+
+                        {brand.dunzo ? (
+                          <a
+                            href={brand.dunzo ? brand.dunzo : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/dunzo.jpg"
+                              alt="dunzo"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/dunzo.jpg"
                             alt="dunzo"
                           />
-                        </a>
+                        )}
                       </div>
                     </div>
                   );

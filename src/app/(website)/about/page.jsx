@@ -154,7 +154,7 @@ const About = () => {
           data.leaders.map((leader) => {
             return (
               <div key={leader.id} className="mt-8 lg:flex gap-12">
-                <div className="lg:max-w-60 border rounded-3xl hover:shadow-xl transition-all duration-300 group cursor-pointer ease-in-out transform hover:scale-[1.02]">
+                <div className="lg:max-w-60 border rounded-3xl hover:shadow-xl transition-all duration-300 group ease-in-out transform hover:scale-[1.02]">
                   <img
                     className="h-auto w-full object-contain rounded-3xl"
                     src={pb.files.getURL(leader, leader.image)}

@@ -5,6 +5,7 @@ import pb from "../../_lib/pb";
 const Financial = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloaded, setDownloaded] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +24,12 @@ const Financial = () => {
 
     fetchData();
   }, []);
+
+  const handleDownload = (key) => {
+    if (!downloaded.includes(key)) {
+      setDownloaded((prev) => [...prev, key]);
+    }
+  };
 
   if (loading)
     return (
@@ -62,57 +69,79 @@ const Financial = () => {
             </tr>
           </thead>
           <tbody className="border-2">
-            {data.map((report) => (
-              <tr className="text-slate-800" key={report.id}>
-                <td className="px-4 py-2 font-semibold text-[#152768] text-center border-2">
-                  {report.title}
-                </td>
-                <td className="px-4 py-2 text-center border-2">
-                  <a
-                    target="_blank"
-                    className="text-red-500"
-                    href={pb.files.getURL(report, report.q1)}
-                  >
-                    {pb.files.getURL(report, report.q1)
-                      ? `30.06.${report.title.split("-")[0]}`
-                      : "-"}
-                  </a>
-                </td>
-                <td className="px-4 py-2 text-center border-2">
-                  <a
-                    target="_blank"
-                    className="text-red-500"
-                    href={pb.files.getURL(report, report.q2)}
-                  >
-                    {pb.files.getURL(report, report.q2)
-                      ? `30.09.${report.title.split("-")[0]}`
-                      : "-"}
-                  </a>
-                </td>
-                <td className="px-4 py-2 text-center border-2">
-                  <a
-                    target="_blank"
-                    className="text-red-500"
-                    href={pb.files.getURL(report, report.q3)}
-                  >
-                    {pb.files.getURL(report, report.q3)
-                      ? `31.12.${report.title.split("-")[0]}`
-                      : "-"}
-                  </a>
-                </td>
-                <td className="px-4 py-2 text-center border-2">
-                  <a
-                    target="_blank"
-                    className="text-red-500"
-                    href={pb.files.getURL(report, report.q4)}
-                  >
-                    {pb.files.getURL(report, report.q4)
-                      ? `31.03.${Number(report.title.split("-")[0]) + 1}`
-                      : "-"}
-                  </a>
-                </td>
-              </tr>
-            ))}
+            {data.map((report) => {
+              return (
+                <tr className="text-slate-800" key={report.id}>
+                  <td className="px-4 py-2 font-semibold text-[#152768] text-center border-2">
+                    {report.title}
+                  </td>
+                  <td className="px-4 py-2 text-center border-2">
+                    <a
+                      target="_blank"
+                      className={` ${
+                        downloaded.includes(`${report.id}-q1`)
+                          ? "text-blue-700"
+                          : "text-red-500"
+                      }`}
+                      onClick={() => handleDownload(`${report.id}-q1`)}
+                      href={pb.files.getURL(report, report.q1)}
+                    >
+                      {pb.files.getURL(report, report.q1)
+                        ? `30.06.${report.title.split("-")[0]}`
+                        : "-"}
+                    </a>
+                  </td>
+                  <td className="px-4 py-2 text-center border-2">
+                    <a
+                      target="_blank"
+                      className={` ${
+                        downloaded.includes(`${report.id}-q2`)
+                          ? "text-blue-700"
+                          : "text-red-500"
+                      }`}
+                      onClick={() => handleDownload(`${report.id}-q2`)}
+                      href={pb.files.getURL(report, report.q2)}
+                    >
+                      {pb.files.getURL(report, report.q2)
+                        ? `30.09.${report.title.split("-")[0]}`
+                        : "-"}
+                    </a>
+                  </td>
+                  <td className="px-4 py-2 text-center border-2">
+                    <a
+                      target="_blank"
+                      className={` ${
+                        downloaded.includes(`${report.id}-q3`)
+                          ? "text-blue-700"
+                          : "text-red-500"
+                      }`}
+                      onClick={() => handleDownload(`${report.id}-q3`)}
+                      href={pb.files.getURL(report, report.q3)}
+                    >
+                      {pb.files.getURL(report, report.q3)
+                        ? `31.12.${report.title.split("-")[0]}`
+                        : "-"}
+                    </a>
+                  </td>
+                  <td className="px-4 py-2 text-center border-2">
+                    <a
+                      target="_blank"
+                      className={` ${
+                        downloaded.includes(`${report.id}-q4`)
+                          ? "text-blue-700"
+                          : "text-red-500"
+                      }`}
+                      onClick={() => handleDownload(`${report.id}-q4`)}
+                      href={pb.files.getURL(report, report.q4)}
+                    >
+                      {pb.files.getURL(report, report.q4)
+                        ? `31.03.${Number(report.title.split("-")[0]) + 1}`
+                        : "-"}
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -8,17 +8,34 @@ export const metadata = {
   description: "",
 };
 
-const banners = await pb.collection("banners").getFullList(200, {
-  sort: "sno",
-  filter: 'page = "investor"',
-});
+// const banners = await pb.collection("banners").getFullList(200, {
+//   sort: "sno",
+//   filter: 'page = "investor"',
+//   requestKey: null,
+// });
 
-export default function RootLayout({ children }) {
+async function getBanners() {
+  try {
+    return await pb.collection("banners").getFullList(200, {
+      sort: "sno",
+      filter: 'page = "investor"',
+    });
+  } catch (err) {
+    console.error("Banner fetch failed:", err);
+    return [];
+  }
+}
+
+export default async function RootLayout({ children }) {
+  const banners = await getBanners();
   return (
     <div className="bg-orange-50">
       <NavBar />
       <div className="flex justify-between items-center max-w-7xl mx-auto mt-16">
-        <img src={pb.files.getURL(banners[0], banners[0].image)} alt="" />
+        <img
+          src={pb.files.getURL(banners[0], banners[0].image)}
+          alt="investor"
+        />
       </div>
       {/* <div className="lg:flex max-w-7xl mx-auto">
         <Sidebar />

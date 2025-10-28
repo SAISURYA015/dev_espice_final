@@ -6,6 +6,7 @@ import { FileText } from "lucide-react";
 const Annual = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloaded, setDownloaded] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,12 @@ const Annual = () => {
 
     fetchData();
   }, []);
+
+  const handleDownload = (id) => {
+    if (!downloaded.includes(id)) {
+      setDownloaded((prev) => [...prev, id]);
+    }
+  };
 
   if (loading)
     return (
@@ -51,20 +58,36 @@ const Annual = () => {
 
       {/* Reports Grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6 w-full max-w-5xl">
-        {data.map((report) => (
-          <a
-            key={report.id}
-            href={pb.files.getURL(report, report.file)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-white shadow-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-[#223972] transition"
-          >
-            <FileText className="w-6 h-6 text-[#223972]" />
-            <span className="text-gray-700 font-medium text-[15px]">
-              {report.title}
-            </span>
-          </a>
-        ))}
+        {data.map((report) => {
+          const isDownloaded = downloaded.includes(report.id);
+          return (
+            <a
+              key={report.id}
+              href={pb.files.getURL(report, report.file)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleDownload(report.id)}
+              className={`flex items-center gap-3 bg-white shadow-sm border rounded-xl p-4 transition ${
+                isDownloaded
+                  ? "border-red-500 hover:shadow-md"
+                  : "border-[#223972] hover:border-[#223972] hover:shadow-md"
+              }`}
+            >
+              <FileText
+                className={`w-6 h-6 ${
+                  isDownloaded ? "text-red-500" : "text-[#223972]"
+                }`}
+              />
+              <span
+                className={`font-medium text-[15px] ${
+                  isDownloaded ? "text-red-600" : "text-gray-700"
+                }`}
+              >
+                {report.title}
+              </span>
+            </a>
+          );
+        })}
       </div>
 
       {/* View More Button */}

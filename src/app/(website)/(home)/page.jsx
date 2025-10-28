@@ -439,7 +439,7 @@ const Home = () => {
                   <div key={image.id}>
                     <div className="flex items-center justify-center border border-gray-300 rounded-2xl">
                       <img
-                        className="object-cover w-full h-64 hover:scale-105 hover:cursor-pointer"
+                        className="object-cover w-full h-64 hover:scale-105 "
                         src={pb.files.getURL(image, image.image)}
                         alt={image.name || "Brand"}
                       />
@@ -512,43 +512,81 @@ const Home = () => {
                     {brand.name}
                   </h2>
                   <div className="flex space-x-4 text-2xl text-gray-600">
-                    <a
-                      href={brand.facebook ? brand.facebook : "#"}
-                      target="_blank"
-                    >
+                    {brand.facebook ? (
+                      <a
+                        href={brand.facebook ? brand.facebook : ""}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/facebook.png"
+                          alt="Facebook"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/facebook.png"
                         alt="Facebook"
                       />
-                    </a>
-                    <a
-                      href={brand.instagram ? brand.instagram : "#"}
-                      target="_blank"
-                    >
+                    )}
+
+                    {brand.instagram ? (
+                      <a
+                        href={brand.instagram ? brand.instagram : ""}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/instagram.png"
+                          alt="Instagram"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/instagram.png"
                         alt="Instagram"
                       />
-                    </a>
-                    <a href={brand.google ? brand.google : "#"} target="_blank">
+                    )}
+
+                    {brand.google ? (
+                      <a
+                        href={brand.google ? brand.google : ""}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/google-logo.png"
+                          alt="Google"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/google-logo.png"
                         alt="Google"
                       />
-                    </a>
-                    <a
-                      href={brand.youtube ? brand.youtube : "#"}
-                      target="_blank"
-                    >
+                    )}
+
+                    {brand.youtube ? (
+                      <a
+                        href={brand.youtube ? brand.youtube : ""}
+                        target="_blank"
+                      >
+                        <img
+                          className="h-6 w-6 rounded object-cover hover:scale-110"
+                          src="/home/so/youtube.png"
+                          alt="Google"
+                        />
+                      </a>
+                    ) : (
                       <img
                         className="h-6 w-6 rounded object-cover hover:scale-110"
                         src="/home/so/youtube.png"
                         alt="Google"
                       />
-                    </a>
+                    )}
                   </div>
                 </div>
               ))}
@@ -579,7 +617,7 @@ const Home = () => {
                       <div className="flex space-x-4 text-2xl text-gray-600">
                         {brand.own_delivery_icon ? (
                           <a
-                            href={brand.own_delivery ? brand.own_delivery : "#"}
+                            href={brand.own_delivery ? brand.own_delivery : ""}
                           >
                             <img
                               className="h-8 w-8 rounded object-cover"
@@ -593,36 +631,63 @@ const Home = () => {
                         ) : (
                           <></>
                         )}
-                        <a
-                          href={brand.swiggy ? brand.swiggy : "#"}
-                          target="_blank"
-                        >
+
+                        {brand.swiggy ? (
+                          <a
+                            href={brand.swiggy ? brand.swiggy : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/swiggy.jpg"
+                              alt="swiggy"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/swiggy.jpg"
                             alt="swiggy"
                           />
-                        </a>
-                        <a
-                          href={brand.zomato ? brand.zomato : "#"}
-                          target="_blank"
-                        >
+                        )}
+
+                        {brand.zomato ? (
+                          <a
+                            href={brand.zomato ? brand.zomato : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/zomato.jpg"
+                              alt="zomato"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/zomato.jpg"
                             alt="zomato"
                           />
-                        </a>
-                        <a
-                          href={brand.dunzo ? brand.dunzo : "#"}
-                          target="_blank"
-                        >
+                        )}
+
+                        {brand.dunzo ? (
+                          <a
+                            href={brand.dunzo ? brand.dunzo : "#"}
+                            target="_blank"
+                          >
+                            <img
+                              className="h-8 w-8 rounded object-cover"
+                              src="/home/dp/dunzo.jpg"
+                              alt="dunzo"
+                            />
+                          </a>
+                        ) : (
                           <img
                             className="h-8 w-8 rounded object-cover"
                             src="/home/dp/dunzo.jpg"
                             alt="dunzo"
                           />
-                        </a>
+                        )}
                       </div>
                     </div>
                   );
